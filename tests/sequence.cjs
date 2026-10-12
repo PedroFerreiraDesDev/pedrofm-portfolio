@@ -4,7 +4,7 @@ const render={};vm.createContext(render);vm.runInContext(read('render-conteudo.j
 const projects=vm.runInNewContext(read('conteudo.js')+';portfolioData.projects');
 for(const p of projects){const html=render.renderProjectContent(p);assert.equal(html.includes('class="wind-sequence"'),p.id==='experiencia');if(p.id==='experiencia'){assert.equal((html.match(/class="sequence-image"/g)||[]).length,1);assert.ok(html.includes('Pular sequência'));assert.ok(html.includes(p.sections[0].image.src));assert.ok(html.includes(p.sections[0].paragraphs[0]));}}
 const events={},frames=[];const node=()=>({style:{},classList:{toggle(){},remove(){}},addEventListener(k,f,options){events[k]=f;if(options?.signal)options.signal.addEventListener('abort',()=>{if(events[k]===f)delete events[k];});}});
-const title=node(),image=node(),copy=node(),canvas=node(),meter=node(),label=node(),skip=node(),letters=Array.from({length:8},node);title.querySelectorAll=()=>letters;canvas.getContext=()=>null;
+const title=node(),image=node(),copy=node(),canvas=node(),meter=node(),label=node(),skip=node(),letters=Array.from({length:8},node);letters.forEach((letter,i)=>letter.parentElement={getBoundingClientRect:()=>({left:i===0?890:0,top:i===0?190:0,width:20,height:20})});title.querySelectorAll=()=>letters;canvas.getContext=()=>null;
 const stage=node();stage.clientWidth=1100;stage.clientHeight=900;stage.getBoundingClientRect=()=>({left:0,top:0,width:1100,height:900});
 let rect={top:-900,bottom:1800,height:2700};const scene=node();scene.getBoundingClientRect=()=>rect;scene.querySelector=s=>({'.sequence-stage':stage,'.sequence-title':title,'.sequence-image':image,'.sequence-copy':copy,canvas,'.sequence-progress':meter,'.sequence-state':label,'.sequence-skip':skip})[s];
 const gallery=node();gallery.clientHeight=900;gallery.scrollTop=1800;gallery.getBoundingClientRect=()=>({top:0});let destination;gallery.scrollTo=v=>destination=v.top;
@@ -12,7 +12,7 @@ const motion=node();motion.matches=false;let current=scene;
 const scope={window:{addEventListener:(k,f)=>events['window:'+k]=f},document:{hidden:false,getElementById:()=>gallery,querySelector:()=>current,body:node(),addEventListener:(k,f)=>events['doc:'+k]=f},innerWidth:1440,innerHeight:900,matchMedia:()=>motion,AbortController,requestAnimationFrame:f=>{frames.push(f);return frames.length;},cancelAnimationFrame(){}};
 vm.runInNewContext(read('sequence.js'),scope);let time=0;const flush=()=>{let n=0;while(frames.length){frames.shift()(time+=16.667);assert.ok(++n<400);}};flush();
 const atHalf=image.style.transform;rect={top:-1600,bottom:1100,height:2700};events.scroll();flush();assert.notEqual(image.style.transform,atHalf);rect={top:-900,bottom:1800,height:2700};events.scroll();flush();assert.equal(image.style.transform,atHalf);
-events.pointermove({pointerType:'mouse',clientX:900,clientY:200});flush();assert.notEqual(image.style.transform,atHalf);assert.equal(frames.length,0);
+events.pointermove({pointerType:'mouse',clientX:900,clientY:200});flush();assert.notEqual(image.style.transform,atHalf);assert.equal(letters[0].style.color,'#563393');assert.equal(letters[1].style.color,'');assert.equal(frames.length,0);
 events.click();assert.equal(destination,3600);
 scope.innerWidth=390;events['window:resize']();flush();assert.equal(image.style.transform,'none');assert.equal(copy.style.opacity,'1');
 scope.innerWidth=1440;motion.matches=true;events.change();flush();assert.equal(image.style.transform,'none');assert.ok(letters.every(l=>l.style.transform==='none'));

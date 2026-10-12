@@ -1,0 +1,10 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const calls=[],buffers=[];let lose=0;
+const gl=new Proxy({getShaderParameter:()=>true,getProgramParameter:()=>true,getAttribLocation:()=>0,getUniformLocation:(p,k)=>k,getError:()=>0,NO_ERROR:0,getExtension:()=>({loseContext(){lose++;}}),bufferData:(type,data)=>buffers.push(data),drawElements:(...v)=>calls.push(v),createShader:()=>({}),createProgram:()=>({}),createBuffer:()=>({}),createTexture:()=>({}),uniform1f:(key,value)=>{if(key==='curl')assert.ok(value>=0&&value<=.65);}}, {get:(obj,k)=>k in obj?obj[k]:(/^[A-Z_]+$/.test(k)?k:()=>{})});
+const source=fs.readFileSync(path.join(__dirname,'../paper.js'),'utf8');const scope={window:{},AbortController,Float32Array,Uint16Array,devicePixelRatio:3};vm.runInNewContext(source,scope);
+const listeners={},canvas={width:0,height:0,getContext:()=>gl,addEventListener:(k,f)=>listeners[k]=f},image={complete:true,naturalWidth:720,naturalHeight:900,addEventListener(){}};
+let ready=false;const renderer=scope.window.PedroPaper(canvas,image,r=>ready=r);assert.equal(ready,true);assert.equal(buffers[0].length,33*41*2);assert.equal(buffers[1].length,32*40*6);assert.ok(Math.max(...buffers[1])<33*41);
+renderer.draw(500,700,50,0,0);assert.equal(canvas.width,750);assert.equal(canvas.height,1050);assert.equal(calls.length,1);
+listeners.webglcontextlost({preventDefault(){}});assert.equal(ready,false);renderer.draw(500,700,.5,0,0);assert.equal(calls.length,1);renderer.destroy();assert.equal(lose,1);
+assert.equal(scope.window.PedroPaper({getContext:()=>null},image,()=>{}),null);
+console.log('OK: malha contínua 32×40, índices válidos, DPR limitado, perda de contexto e fallback. WebGL simulado; GPU real não validada.');

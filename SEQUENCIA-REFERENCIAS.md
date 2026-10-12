@@ -1,6 +1,6 @@
 # Sequência representativa — Experiência
 
-Este piloto substitui somente o primeiro par de texto/imagem do projeto `experiencia`. A imagem continua provisória. O restante dos projetos conserva o comportamento anterior para permitir comparação.
+Este piloto transforma o primeiro par de texto/imagem e coordena a chegada do segundo par do projeto `experiencia`. A imagem continua provisória. O restante dos projetos conserva o comportamento anterior para permitir comparação.
 
 ## Direção e referências
 
@@ -13,11 +13,13 @@ Este piloto substitui somente o primeiro par de texto/imagem do projeto `experie
 
 O acesso às referências nesta sessão foi textual. Não afirmamos ter reproduzido ou analisado quadro a quadro suas animações. A sequência implementada é uma interpretação autoral para vento, onda e papel na marca Pedro.fm.
 
-## Três momentos
+## Cinco momentos
 
-1. **Impulso:** título amplo e uma corrente translúcida no espaço branco.
-2. **Forma:** o scroll desloca e reduz o título; a imagem chega da direita com rotação em três eixos. Depois se alinha e aparece o contexto.
-3. **Passagem:** a folha sobe e inclina para conduzir à seção seguinte.
+1. **Presença:** título amplo e corrente translúcida no espaço branco.
+2. **Aproximação:** a imagem chega da direita em perspectiva, com bordas curvas.
+3. **Observação:** a fotografia se alinha e a curvatura recua para zero em repouso. O texto de contexto aparece ao lado.
+4. **Descoberta:** a margem apresenta o anúncio da próxima seção de processo, ainda com conteúdo provisório.
+5. **Continuidade:** a folha sobe e inclina; o segundo par entra com posições coordenadas pela mesma rolagem.
 
 No desktop, a seção tem 300 alturas de viewport e seu palco permanece visível por parte desse percurso usando `position: sticky`. A rolagem pertence ao contêiner existente `#gallery`; não foi criado outro scroller. O botão Pular sequência leva diretamente ao conteúdo seguinte.
 
@@ -33,11 +35,11 @@ As margens combinam o espaçamento já existente do estudo e 7–9% internos na 
 
 `pose(progress)` separa a coreografia da leitura do DOM. Recebe um número de 0 a 1 e devolve posições, rotações e opacidade. Sua função de aceleração é `x*x*(3-2*x)`, que suaviza as extremidades. Os mesmos valores de scroll produzem a mesma coreografia.
 
-A imagem usa CSS `translate3d`, `rotateX`, `rotateY` e `rotateZ`. É um plano inteiro em perspectiva: não há fragmentação, curvatura real da fotografia ou malha 3D de um objeto nesta versão.
+A imagem usa CSS `translate3d`, `rotateX`, `rotateY` e `rotateZ`. Dentro desse plano, paper.js desenha uma malha contínua de 32 × 40 células em WebGL. A mesma fotografia é aplicada como uma única textura. O shader de vértices curva as bordas durante a aproximação e a saída, sem dividir a imagem em faixas. No momento de observação, a curvatura se anula em repouso. A imagem HTML original reaparece se WebGL falhar, no celular ou com movimento reduzido. Não há modelo 3D de um objeto; há uma superfície de papel deformável.
 
 A corrente usa WebGL nativo com dois triângulos cobrindo o Canvas. O fragment shader calcula uma faixa com largura variável, contorno colorido e linhas internas. Combina ondas de frequências diferentes; o gesto altera a energia e a fase, que continuam brevemente após o mouse parar. É uma membrana gráfica translúcida, não refração real do conteúdo nem uma simulação física de fluidos.
 
-Não adicionamos Three.js ou GSAP neste piloto: a cena usa um shader e a rolagem já existente. Essas bibliotecas continuam opções para uma etapa que exija malhas curvas, texturas deformáveis ou várias cenas coordenadas.
+Não adicionamos Three.js ou GSAP neste piloto: a cena usa shaders nativos e a rolagem já existente. Essas bibliotecas continuam opções para uma etapa que exija modelos tridimensionais mais complexos ou várias cenas coordenadas.
 
 Referências técnicas:
 - WebGL: https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
@@ -61,3 +63,9 @@ Abra `#projeto/experiencia` e role até o título “O invisível move a forma.�
 5. Teste celular, teclado e movimento reduzido.
 
 Teste funcional: `node tests/sequence.cjs`. Ele verifica a integração, a reversibilidade dos cálculos, o comportamento sem WebGL e a remoção dos eventos. Esses testes não comprovam o acabamento visual nem o desempenho em uma GPU real.
+
+## Atualização do piloto
+
+A reação das letras agora usa a distância do ponteiro ao retângulo real de cada glifo. O glifo possui um invólucro estável para medir a posição e uma camada interna para animar, evitando que o próprio movimento altere a referência do hover.
+
+Testes: `node tests/sequence.cjs`, `node tests/paper.cjs` e `node tests/ressonancia.cjs`. O teste de WebGL verifica geometria, chamadas e recuperação por meio de uma API simulada; não compila os shaders numa GPU real e não substitui inspeção visual.
