@@ -48,7 +48,23 @@ function representativeSequence(block){
  const image=block.image||{};
  return '<section class="wind-sequence" aria-label="Estudo de movimento: impulso, forma e passagem"><div class="sequence-stage"><canvas class="sequence-membrane" aria-hidden="true"></canvas><div class="sequence-fallback" aria-hidden="true"></div><div class="sequence-topline"><span>PEDRO.FM / ESTUDO DE MOVIMENTO</span><button class="sequence-skip" type="button">Pular sequência ↓</button></div><h2 class="sequence-title" aria-label="O invisível move a forma."><span class="sequence-title-line">'+letters('O invisível')+'</span><em class="sequence-title-line">'+letters('move a forma.')+'</em></h2><figure class="sequence-image"><span class="sequence-paper"><img src="'+escapeContent(image.src)+'" alt="'+escapeContent(image.alt)+'" width="'+mediaDimension(image.width,720)+'" height="'+mediaDimension(image.height,900)+'" loading="lazy" decoding="async"><canvas class="sequence-mesh" aria-hidden="true"></canvas></span><figcaption>COMPOSIÇÃO PROVISÓRIA / IMAGEM DO PROJETO A INSERIR</figcaption></figure><div class="sequence-copy"><h3>'+escapeContent(block.title)+'</h3>'+textContentBlock({...block,title:''})+'</div><p class="sequence-detail">A seguir / Por trás da forma.</p><div class="sequence-bottom"><span class="sequence-state">01 / IMPULSO</span><div class="sequence-track"><div class="sequence-progress"></div></div><span>ROLE PARA DESCOBRIR</span></div></div></section>';
 }
+function flowLetters(text){return String(text).split(' ').map(word=>'<span class="flow-word">'+[...word].map(char=>'<span class="sequence-glyph" aria-hidden="true"><span class="sequence-letter">'+escapeContent(char)+'</span></span>').join('')+'</span>').join(' ');}
+function flowImage(image){if(!image||!safeAsset(image.src))return '';return '<figure class="flow-picture"><span class="sequence-paper"><img src="'+escapeContent(image.src)+'" alt="'+escapeContent(image.alt||'Imagem do estudo')+'" width="'+mediaDimension(image.width,1200)+'" height="'+mediaDimension(image.height,900)+'" loading="lazy" decoding="async"><canvas class="sequence-mesh" aria-hidden="true"></canvas></span><figcaption>'+escapeContent(image.caption||'Material provisório')+'</figcaption></figure>';}
+function experiencePage(project){
+ const sections=project.sections||[];
+ const blocks=sections.map((block,index)=>{
+  if(index===0)return representativeSequence(block);
+  const heading=block.title?'<h2 class="flow-heading" aria-label="'+escapeContent(block.title)+'">'+flowLetters(block.title)+'</h2>':'';
+  const copy='<div class="flow-copy">'+heading+textContentBlock({...block,title:'',pending:false})+'</div>';
+  if(block.type==='pair')return '<section class="flow-row '+(block.imageSide==='left'?'flow-reverse':'')+'">'+copy+flowImage(block.image)+'</section>';
+  if(block.type==='image')return '<section class="flow-row flow-wide">'+flowImage(block.image)+'</section>';
+  if(block.type==='text')return '<section class="flow-row flow-text">'+copy+'</section>';
+  return '<section class="flow-row">'+renderContentBlock(block,index,false)+'</section>';
+ }).join('');
+ return '<div class="detail-inner experience-flow" data-resonance-project="experiencia"><div class="flow-atmosphere" aria-hidden="true"><canvas></canvas><div class="sequence-fallback"></div></div><div class="flow-content"><div class="flow-intro"><p class="eyebrow">DESIGN / ESTUDO EM PREPARAÇÃO</p><h1 class="flow-heading" aria-label="'+escapeContent(project.title)+'">'+flowLetters(project.title)+'</h1><p class="lead">'+escapeContent(project.lead)+'</p><div class="metadata">'+(project.metadata||[]).map(item=>'<div><strong>'+escapeContent(item.label)+'</strong><p>'+escapeContent(item.value)+'</p></div>').join('')+'</div></div>'+blocks+'<div class="flow-end"><button class="back" data-close>Voltar à capa</button></div></div></div>';
+}
 function renderProjectContent(project){
+ if(project.id==='experiencia')return experiencePage(project);
  const metadata=Array.isArray(project.metadata)?project.metadata:[];
  const intro='<p class="eyebrow">'+escapeContent(project.category)+(project.provisional?' / CONTEÚDO EM PREPARAÇÃO':'')+'</p><h1>'+escapeContent(project.title)+'</h1>';
  const lead=project.lead?'<p class="lead">'+escapeContent(project.lead)+'</p>':'';

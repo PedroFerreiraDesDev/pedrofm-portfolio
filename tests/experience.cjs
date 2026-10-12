@@ -1,0 +1,18 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');const rootPath=path.resolve(__dirname,'..'),read=f=>fs.readFileSync(path.join(rootPath,f),'utf8');
+const r={};vm.createContext(r);vm.runInContext(read('render-conteudo.js'),r);const data=vm.runInNewContext(read('conteudo.js')+';portfolioData');
+const p=data.projects.find(p=>p.id==='experiencia'),html=r.renderProjectContent(p);
+assert.ok(html.includes('experience-flow'));assert.equal((html.match(/class="flow-picture"/g)||[]).length,4);assert.equal((html.match(/class="sequence-image"/g)||[]).length,1);assert.ok(!html.includes('resonance-band'));assert.ok(p.provisional);assert.ok(html.includes('MATERIAL PROVISÓRIO'));
+for(const p of data.projects.filter(p=>p.id!=='experiencia'))assert.ok(!r.renderProjectContent(p).includes('experience-flow'));
+const frames=[],events={},node=()=>({style:{},listeners:{},classList:{toggle(){},remove(){},contains:()=>false},addEventListener(k,f,options){this.listeners[k]=f;options?.signal?.addEventListener('abort',()=>delete this.listeners[k]);}});
+const gallery=node();gallery.scrollTop=0;gallery.clientHeight=900;gallery.hidden=false;gallery.getBoundingClientRect=()=>({top:0});
+const canvas=node(),air=node(),copy=node(),figure=node(),mesh=node(),photo=node(),row=node(),root=node();air.clientWidth=1200;air.querySelector=()=>canvas;mesh.clientWidth=600;mesh.clientHeight=750;
+let top=500,created=0,destroyed=0,rendered=0;row.getBoundingClientRect=()=>({top,bottom:top+950});row.querySelector=s=>s==='.flow-copy'?copy:figure;row.querySelectorAll=()=>[];figure.getBoundingClientRect=()=>({left:600,right:1200,top:top+100,bottom:top+850});figure.querySelector=s=>s==='canvas'?mesh:photo;
+root.getBoundingClientRect=()=>({top:-200,bottom:7000,height:7200});root.querySelector=()=>air;root.querySelectorAll=()=>[row];
+let current=root;const motion=node();motion.matches=false;
+const scope={window:{addEventListener:(k,f)=>events[k]=f,PedroMembrane:()=>({draw(){},destroy(){}}),PedroPaper:()=>{created++;return{draw(){rendered++;},destroy(){destroyed++;}};}},document:{hidden:false,body:node(),getElementById:()=>gallery,querySelector:()=>current,addEventListener(){}},matchMedia:()=>motion,innerWidth:1440,innerHeight:900,AbortController,requestAnimationFrame:f=>{frames.push(f);return frames.length;},cancelAnimationFrame(){}};
+vm.runInNewContext(read('experience.js'),scope);let time=0;const flush=()=>{let guard=0;while(frames.length){frames.shift()(time+=16.67);assert.ok(++guard<400);}};flush();assert.equal(created,1);assert.ok(rendered>0);const initial=figure.style.transform;
+top=100;gallery.listeners.scroll();flush();assert.notEqual(figure.style.transform,initial);top=500;gallery.listeners.scroll();flush();assert.equal(figure.style.transform,initial);
+top=-2000;gallery.listeners.scroll();flush();assert.equal(destroyed,1);top=300;gallery.listeners.scroll();flush();assert.equal(created,2);
+motion.matches=true;motion.listeners.change();flush();assert.equal(figure.style.transform,'none');assert.equal(copy.style.opacity,'1');
+current=null;events.hashchange();flush();assert.equal(destroyed,2);assert.equal(gallery.listeners.scroll,undefined);
+console.log('OK: página restrita a Experiência, cinco imagens sem faixas, conteúdo provisório, movimento reversível, recursos sob demanda, movimento reduzido e limpeza.');

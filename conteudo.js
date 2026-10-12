@@ -1,4 +1,4 @@
-/* Edite os projetos e blocos aqui. Consulte COMO-EDITAR.md. */
+/* Conteúdo editável. Materiais provisórios devem ser substituídos antes de apresentar resultados. */
 const portfolioData = {
   "projects": [
     {
@@ -252,7 +252,8 @@ const portfolioData = {
           "title": "O ponto de partida.",
           "pending": true,
           "paragraphs": [
-            "Inserir o contexto real, o público, o desafio e as restrições deste projeto."
+            "Toda experiência começa com uma pergunta. Neste espaço, vamos apresentar o contexto, as pessoas envolvidas e o problema que orientou o projeto.",
+            "O conteúdo definitivo deve mostrar quais necessidades foram identificadas e quais restrições influenciaram as primeiras decisões."
           ],
           "imageSide": "right",
           "image": {
@@ -268,7 +269,8 @@ const portfolioData = {
           "title": "Por trás da forma.",
           "pending": true,
           "paragraphs": [
-            "Apresentar decisões, alternativas e consequências com registros de processo autorizados."
+            "Aqui entram as alternativas consideradas: esboços, referências, tentativas e caminhos que foram deixados para trás.",
+            "Os registros reais ajudarão a explicar por que uma direção foi escolhida e como ela responde ao desafio inicial."
           ],
           "imageSide": "left",
           "image": {
@@ -276,6 +278,59 @@ const portfolioData = {
             "alt": "Composição provisória reservada para um registro autorizado do processo",
             "caption": "02 / REGISTRO DO PROCESSO · COMPOSIÇÃO PROVISÓRIA · IMAGEM DO TRABALHO PENDENTE",
             "width": 720,
+            "height": 900
+          }
+        },
+        {
+          "type": "text",
+          "title": "Uma decisão muda o conjunto.",
+          "pending": true,
+          "paragraphs": [
+            "O processo será apresentado como uma sequência de relações: o que mudou, por que mudou e o que essa mudança tornou possível.",
+            "Este trecho receberá uma decisão central do projeto, acompanhada de uma evidência visual e de uma explicação direta."
+          ]
+        },
+        {
+          "type": "pair",
+          "title": "Um sistema que se conecta.",
+          "pending": true,
+          "imageSide": "right",
+          "paragraphs": [
+            "Tipografia, cor, imagem e movimento precisam compartilhar uma intenção. Aqui será explicado como esses elementos se relacionam no sistema desenvolvido.",
+            "As composições desta página são estudos visuais provisórios. Serão substituídas por aplicações autorizadas, com legendas que expliquem as escolhas."
+          ],
+          "image": {
+            "src": "assets/experiencia-sistema.svg",
+            "alt": "Estudo gráfico abstrato provisório, não representa um trabalho concluído",
+            "caption": "03 / RELAÇÕES VISUAIS / MATERIAL PROVISÓRIO",
+            "width": 1200,
+            "height": 900
+          }
+        },
+        {
+          "type": "image",
+          "image": {
+            "src": "assets/experiencia-aplicacao.svg",
+            "alt": "Estudo gráfico abstrato provisório, não representa um trabalho concluído",
+            "caption": "04 / APLICAÇÃO / MATERIAL PROVISÓRIO",
+            "width": 1200,
+            "height": 900
+          }
+        },
+        {
+          "type": "pair",
+          "title": "De perto, outras escolhas.",
+          "pending": true,
+          "imageSide": "left",
+          "paragraphs": [
+            "Uma imagem geral apresenta o resultado. Um detalhe pode revelar proporção, ritmo, material ou comportamento que passaria despercebido.",
+            "Este espaço será usado para aproximar uma parte importante do trabalho e relacioná-la ao objetivo do projeto."
+          ],
+          "image": {
+            "src": "assets/experiencia-detalhe.svg",
+            "alt": "Estudo gráfico abstrato provisório, não representa um trabalho concluído",
+            "caption": "05 / DETALHE / MATERIAL PROVISÓRIO",
+            "width": 1200,
             "height": 900
           }
         },
@@ -295,7 +350,8 @@ const portfolioData = {
             "Confirmar autoria, equipe, fontes e autorização de exposição."
           ]
         }
-      ]
+      ],
+      "lead": "Um espaço para revelar o resultado e as escolhas que o tornaram possível. Este estudo está em preparação: imagens, contexto e evidências serão substituídos pelos materiais reais do projeto."
     },
     {
       "id": "social-identidade",

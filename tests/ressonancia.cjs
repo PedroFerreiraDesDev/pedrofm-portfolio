@@ -7,7 +7,7 @@ for(const project of projects){
  assert.equal(html.includes('data-resonance-project'),!project.about);
  assert.ok(!html.includes('discovery-lab'));
  const images=(project.sections||[]).filter(b=>['image','pair'].includes(b.type)&&b.image?.src).length;
- assert.equal((html.match(/class="resonance-band"/g)||[]).length,project.about?0:(images-(project.id==='experiencia'?2:0))*7);
+ assert.equal((html.match(/class="resonance-band"/g)||[]).length,project.about||project.id==='experiencia'?0:images*7);
  assert.ok(!html.includes('loading="eager"'));
 }
 const picture=render.imageContent({src:'assets/example.webp',alt:'Descrição única',width:800,height:600},true);

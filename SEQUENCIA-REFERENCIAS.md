@@ -1,3 +1,17 @@
+# Experiência — página contínua
+
+A linguagem do piloto aprovado foi estendida à página inteira de Experiência. A abertura continua com sua sequência; o restante usa rolagem vertical contínua, uma atmosfera WebGL compartilhada e quatro imagens adicionais com malha de papel. O conteúdo e as cinco imagens são provisórios. Os demais projetos não foram alterados.
+
+Arquivos principais: `experience.js` (atmosfera, entradas, hover e ciclo de vida das malhas), `experience.css` (margens e composições), `conteudo.js` (textos e mídias editáveis), `paper.js` (superfície contínua) e `sequence.js` (abertura aprovada).
+
+O sistema libera as malhas dos trechos distantes da tela. Somente a abertura mantém um trecho fixado pelo scroll; os blocos seguintes não criam rolagem independente. No celular, as imagens ficam inteiras em leitura vertical e a atmosfera acompanha o percurso.
+
+Teste adicional: `node tests/experience.cjs`. Não houve inspeção visual em navegador nem medição em GPU real nesta sessão.
+
+---
+
+## Histórico do piloto e referências
+
 # Sequência representativa — Experiência
 
 Este piloto transforma o primeiro par de texto/imagem e coordena a chegada do segundo par do projeto `experiencia`. A imagem continua provisória. O restante dos projetos conserva o comportamento anterior para permitir comparação.

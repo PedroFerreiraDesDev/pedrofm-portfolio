@@ -47,7 +47,7 @@
  }
  function schedule(){if(!frame)frame=requestAnimationFrame(draw);}
  function setup(){
-  blocks=[...details.querySelectorAll('.detail-inner > *:not(.story-pair):not(.discovery-lab):not(.wind-sequence), .story-pair:not(.sequence-followup) > *')].map(node=>{node.classList.add('story-block','is-seen');return{node,top:0,bands:[...(node.querySelectorAll?.('.resonance-band')||[])]};});
+  blocks=details.querySelector?.('.experience-flow')?[]:[...details.querySelectorAll('.detail-inner > *:not(.story-pair):not(.discovery-lab):not(.wind-sequence), .story-pair:not(.sequence-followup) > *')].map(node=>{node.classList.add('story-block','is-seen');return{node,top:0,bands:[...(node.querySelectorAll?.('.resonance-band')||[])]};});
   details.querySelectorAll('.resonance-surface').forEach(surface=>{
    const images=[...surface.querySelectorAll('img')];
    const ready=()=>{if(images.every(img=>img.complete&&img.naturalWidth>0))surface.classList.add('is-ready');};

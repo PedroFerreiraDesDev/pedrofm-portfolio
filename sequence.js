@@ -31,8 +31,10 @@
   const u=Object.fromEntries(['phase','energy','progress','pointer','aspect'].map(k=>[k,gl.getUniformLocation(program,k)]));
   return{draw(w,h,p,x,y,e,t){const ratio=Math.min(devicePixelRatio||1,1.25);const W=Math.round(w*ratio),H=Math.round(h*ratio);if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H;gl.viewport(0,0,W,H);}gl.uniform1f(u.phase,t);gl.uniform1f(u.energy,e);gl.uniform1f(u.progress,p);gl.uniform1f(u.aspect,w/h);gl.uniform2f(u.pointer,x,y);gl.drawArrays(gl.TRIANGLES,0,6);},destroy(){gl.deleteBuffer(buffer);gl.deleteProgram(program);gl.deleteShader(vs);gl.deleteShader(fs);gl.getExtension('WEBGL_lose_context')?.loseContext();}};
  }
+ window.PedroMembrane=membrane;
  function mount(){
   dispose();const scene=document.querySelector('.wind-sequence');if(!scene||!gallery)return;
+  const ownsAir=!scene.closest?.('.experience-flow');
   const events=new AbortController(),signal=events.signal,stage=scene.querySelector('.sequence-stage'),title=scene.querySelector('.sequence-title'),image=scene.querySelector('.sequence-image'),copy=scene.querySelector('.sequence-copy'),canvas=scene.querySelector('canvas'),meter=scene.querySelector('.sequence-progress'),label=scene.querySelector('.sequence-state'),letters=[...title.querySelectorAll('.sequence-letter')];
   const paperCanvas=scene.querySelector('.sequence-mesh'),photo=image.querySelector?.('img'),detail=scene.querySelector('.sequence-detail'),next=scene.nextElementSibling?.classList.contains('sequence-followup')?scene.nextElementSibling:null;
   let paper=null,paperAttempted=false,mouseX=Infinity,mouseY=Infinity;
@@ -43,11 +45,11 @@
    frame=0;if(!alive||document.hidden)return;
    const rect=scene.getBoundingClientRect(),view=gallery.getBoundingClientRect(),height=gallery.clientHeight;
    const active=rect.top<view.top+height*.85&&rect.bottom>view.top+height*.15;
-   document.body.classList.toggle('sequence-active',active&&!motion.matches);
+   if(ownsAir)document.body.classList.toggle('sequence-active',active&&!motion.matches);
    if(next){const nr=next.getBoundingClientRect(),arrival=ease((view.top+height*.92-nr.top)/(height*.75)),copyNext=next.querySelector('.story-copy'),imageNext=next.querySelector('.story-visual');[copyNext,imageNext].forEach((node,i)=>{if(!node)return;node.style.transform=motion.matches||small()?'none':'translate3d('+((1-arrival)*(i?100:-80))+'px,'+((1-arrival)*(i?100:35))+'px,0) rotate('+((1-arrival)*(i?-7:0))+'deg)';node.style.opacity=motion.matches||small()?'1':String(.3+.7*arrival);});}
    if(!active){lastTime=0;return;}
    if(!paperAttempted&&!motion.matches&&!small()&&paperCanvas&&photo&&window.PedroPaper){paperAttempted=true;paper=window.PedroPaper(paperCanvas,photo,ready=>{image.classList.toggle('mesh-ready',ready);schedule();});}
-   if(!attempted&&!motion.matches){attempted=true;try{renderer=membrane(canvas);}catch{}stage.classList.toggle('has-webgl',!!renderer);}
+   if(ownsAir&&!attempted&&!motion.matches){attempted=true;try{renderer=membrane(canvas);}catch{}stage.classList.toggle('has-webgl',!!renderer);}
    const dt=lastTime?Math.min((time-lastTime)/16.667,3):1;lastTime=time;
    progress=clamp((view.top-rect.top)/Math.max(1,rect.height-height));
    energy=Math.min(1.5,energy+Math.abs(progress-lastProgress)*7);lastProgress=progress;
@@ -72,7 +74,7 @@
   document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;lastTime=0;}else schedule();},{signal});
   canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();renderer=null;stage.classList.remove('has-webgl');},{signal});
   scene.querySelector('.sequence-skip').addEventListener('click',()=>{const r=scene.getBoundingClientRect(),v=gallery.getBoundingClientRect();gallery.scrollTo({top:gallery.scrollTop+r.bottom-v.top,behavior:motion.matches?'auto':'smooth'});},{signal});
-  dispose=()=>{alive=false;events.abort();cancelAnimationFrame(frame);renderer?.destroy();paper?.destroy();document.body.classList.remove('sequence-active');};schedule();
+  dispose=()=>{alive=false;events.abort();cancelAnimationFrame(frame);renderer?.destroy();paper?.destroy();if(ownsAir)document.body.classList.remove('sequence-active');};schedule();
  }
  window.addEventListener('hashchange',mount);mount();
 })();

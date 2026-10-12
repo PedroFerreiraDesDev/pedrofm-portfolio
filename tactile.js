@@ -5,7 +5,7 @@
  function reset(){if(active){active.classList.remove('ink-active','wind-image-active');active.style.removeProperty('--ink-field');active.style.removeProperty('--image-wind-mask');}active=null;kind='';}
  function targetAt(x,y){
   const target=document.elementFromPoint(x,y);if(!target)return null;
-  if(target.closest('.wind-sequence'))return null;
+  if(target.closest('.wind-sequence,.experience-flow'))return null;
    const text=target.closest('.cover-word,#name-link,#project-title,#category,#name-intro p,#name-intro>span,#case h1,#case h2,#case p');
   if(text)return {node:text,kind:'text'};
   const image=target.closest('.story-visual');if(image)return {node:image,kind:'image'};
