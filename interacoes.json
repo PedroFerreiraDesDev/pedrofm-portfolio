@@ -4,50 +4,50 @@
     "amplitude": 30,
     "depth": 90,
     "frequency": 3,
-    "variant": "layers"
+    "intensity": 0.65
   },
   "projects": {
     "identidade": {
-      "variant": "layers",
       "amplitude": 30,
       "depth": 90,
-      "frequency": 3
+      "frequency": 3,
+      "intensity": 0.65
     },
     "direcao": {
-      "variant": "resonance",
       "amplitude": 38,
       "depth": 110,
-      "frequency": 4
+      "frequency": 4,
+      "intensity": 0.65
     },
     "editorial": {
-      "variant": "journey",
       "amplitude": 26,
       "depth": 75,
-      "frequency": 5
+      "frequency": 5,
+      "intensity": 0.65
     },
     "experiencia": {
-      "variant": "layers",
       "amplitude": 30,
       "depth": 90,
-      "frequency": 3
+      "frequency": 3,
+      "intensity": 0.65
     },
     "social-identidade": {
-      "variant": "resonance",
       "amplitude": 38,
       "depth": 110,
-      "frequency": 4
+      "frequency": 4,
+      "intensity": 0.65
     },
     "social-campanha": {
-      "variant": "journey",
       "amplitude": 26,
       "depth": 75,
-      "frequency": 5
+      "frequency": 5,
+      "intensity": 0.65
     },
     "endomarketing": {
-      "variant": "layers",
       "amplitude": 30,
       "depth": 90,
-      "frequency": 3
+      "frequency": 3,
+      "intensity": 0.65
     }
   }
 }

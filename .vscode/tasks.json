@@ -5,20 +5,47 @@
       "label": "Pedro.fm: iniciar site local",
       "type": "process",
       "command": "C:\\Users\\Pedro\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
-      "args": ["servir-rede.cjs"],
-      "options": {"cwd": "${workspaceFolder}"},
+      "args": [
+        "servir-rede.cjs"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "isBackground": true,
       "problemMatcher": [],
-      "presentation": {"reveal": "always", "panel": "dedicated"}
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
     },
     {
       "label": "Pedro.fm: verificar conteúdo",
       "type": "process",
       "command": "C:\\Users\\Pedro\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
-      "args": ["verificar-conteudo.cjs"],
-      "options": {"cwd": "${workspaceFolder}"},
+      "args": [
+        "verificar-conteudo.cjs"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": [],
-      "group": {"kind": "test", "isDefault": true}
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Pedro.fm: testar ressonância",
+      "type": "process",
+      "command": "C:\\Users\\Pedro\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "args": [
+        "tests/ressonancia.cjs"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "test"
     }
   ]
 }
