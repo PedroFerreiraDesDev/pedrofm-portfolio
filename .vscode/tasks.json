@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Pedro.fm: iniciar site local",
+      "type": "process",
+      "command": "C:\\Users\\Pedro\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "args": ["servir-rede.cjs"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {"reveal": "always", "panel": "dedicated"}
+    },
+    {
+      "label": "Pedro.fm: verificar conteúdo",
+      "type": "process",
+      "command": "C:\\Users\\Pedro\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "args": ["verificar-conteudo.cjs"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": [],
+      "group": {"kind": "test", "isDefault": true}
+    }
+  ]
+}

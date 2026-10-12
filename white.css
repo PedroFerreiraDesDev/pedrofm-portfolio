@@ -1,0 +1,111 @@
+/* Pedro.fm: edição clara e estudo em folhas giratórias. */
+:root{--bg:#fff;--fg:#181818}
+body,#gallery,#gallery-stage,#case{background:#fff;color:#181818}
+#name-link{color:#181818}
+#name-intro>span,.map-subtitle,.note,.muted{color:#626262}
+#name-link:hover{color:#181818;background:none;text-shadow:none}
+button:focus-visible,a:focus-visible{outline-color:#7251ab!important}
+#gallery button,#sound-toggle,.code-tabs button,.download{background:#fff;color:#181818;border-color:#b7b7b7}
+#sound-toggle[aria-pressed=true]{background:#f0ecf7;color:#5c3d8d;border-color:#7251ab}
+#gallery .accent{background:#e5ff54;color:#181818}
+#gallery button:disabled{opacity:.35}
+.gallery-top #counter{background:#fff;color:#181818}
+#lens{background:#fff;color:#181818;border-color:#7251ab;box-shadow:0 10px 40px #18181816}
+#lens span,#lens small{color:#5c3d8d}
+#case .pending{color:#626262;border-color:#c2c2c2}
+#case .metadata{border-color:#d7d7d7}
+pre{background:#f6f6f6;color:#181818;border-color:#ddd}
+.code-tabs button.active{background:#e5ff54;color:#181818}
+.card-summary{background:#ffffffef;color:#181818}
+
+#gallery.reading{overflow-y:auto;overflow-x:hidden;touch-action:pan-y}
+#gallery-stage{display:block}
+#case{position:relative;min-height:100dvh}
+
+.cover-word::after,.slide .cover-word::after,#name-link::after{content:attr(data-ink);position:absolute;inset:0;white-space:pre-line;pointer-events:none;color:#7251ab;opacity:var(--ink,0);-webkit-mask-image:var(--wind-mask,none);mask-image:var(--wind-mask,none);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+#name-link{position:relative}
+.project-map .cover-word{animation:letter-drift 9s ease-in-out infinite}
+@keyframes letter-drift{0%,100%{transform:translate3d(-1px,1px,0)}50%{transform:translate3d(2px,-3px,0)}}
+#paper-plane{box-shadow:0 14px 36px #18181814;backface-visibility:hidden}
+@media(prefers-reduced-motion:reduce){.project-map .cover-word{animation:none!important}}
+
+/* Resultado e raciocínio em pares: alinhamento consistente, ritmos de entrada diferentes. */
+.cover-word::after,.slide .cover-word::after,#name-link::after{display:none!important}
+.wind-text-tint{position:absolute;inset:0;display:block;margin:0;padding:inherit;font:inherit;letter-spacing:inherit;text-align:inherit;color:#246a8e;pointer-events:none;opacity:0;-webkit-mask-image:var(--ink-field);mask-image:var(--ink-field);-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.ink-active{position:relative}
+.ink-active>.wind-text-tint{opacity:1}
+.ink-active,#name-link.ink-active,#name-link.ink-active:hover{background-image:none!important}
+#case .detail-inner{max-width:1360px;padding:90px 6vw 110px}
+#case .detail-inner>h1{max-width:950px}
+#case .detail-inner>.eyebrow{color:#5c3d8d}
+.story-pair{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:clamp(32px,6vw,90px);min-height:86vh;padding:80px 0}
+#case .story-pair .story-copy{max-width:none;margin:0;min-width:0}
+#case .story-copy h2{font-size:clamp(32px,4vw,58px);line-height:1.05;letter-spacing:-.04em}
+#case .story-copy .pending{border:0;border-left:2px solid #c6b8ed;padding:0 0 0 22px;line-height:1.8}
+.story-pair.reverse{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.story-pair.reverse .story-copy{grid-column:2;grid-row:1}
+.story-pair.reverse .story-visual{grid-column:1;grid-row:1}
+#case .story-pair .story-visual{position:relative;min-width:0;min-height:0;margin:0;padding:0;aspect-ratio:4/5;border-radius:3px;box-shadow:0 24px 70px #18181814;display:block;background:#f5f4f1!important}
+.story-visual img{display:block;width:100%;height:100%;object-fit:cover}
+.story-visual figcaption{position:absolute;left:24px;right:24px;bottom:22px;font:10px/1.5 monospace;color:#181818;letter-spacing:1px}
+#case .detail-inner>section:not(.story-pair){max-width:740px;margin:90px 0}
+#case .detail-inner>section:nth-last-of-type(1){margin-left:auto}
+#case .story-pair>*{transition:transform .18s ease-out}
+@media(max-width:760px){
+ #case .detail-inner{padding:60px 6vw 90px}
+ .story-pair,.story-pair.reverse{grid-template-columns:minmax(0,1fr);gap:40px;min-height:0;padding:45px 0 65px}
+ .story-pair.reverse .story-copy,.story-pair.reverse .story-visual{grid-column:1;grid-row:auto}
+ #case .story-pair .story-visual{aspect-ratio:4/3}
+ #case .detail-inner>section:not(.story-pair){margin:60px 0}
+}
+
+/* Un seul rythme: la position suit le scroll, sans seconde transition CSS en retard. */
+:root{--scene-duration:.98s;--scene-ease:cubic-bezier(.16,.8,.2,1)}
+#track{transition:transform var(--scene-duration) var(--scene-ease)}
+.story-block,.story-block.is-seen,#case .story-pair>*{transition:none;transform-origin:50% 65%}
+#gallery{overflow-anchor:none}
+.story-pair{gap:clamp(40px,6vw,90px);min-height:80vh;padding:65px 0}
+@media(max-width:760px){.story-pair,.story-pair.reverse{gap:36px;min-height:0;padding:40px 0 60px}}
+
+.project-map .grid.expanded-map .map-node{left:var(--auto-left);top:var(--auto-top);width:var(--auto-width);height:var(--auto-height);max-width:none}
+.project-map .grid.expanded-map .card{padding:16px}
+.project-map .grid.expanded-map .cover-word{font-size:var(--auto-type);margin-top:18px}
+.project-map .grid.expanded-map .card-bottom{font-size:10px;bottom:12px;left:16px;right:16px}
+#case .story-visual:not(.story-pair .story-visual){height:auto;min-height:0;aspect-ratio:auto;padding:0}
+#case .story-visual:not(.story-pair .story-visual) img{height:auto;object-fit:contain}
+
+#case .story-pair .story-visual{aspect-ratio:var(--image-ratio,4/5)}
+#case .detail-inner>.story-visual{position:relative}
+#case .detail-inner>.story-visual figcaption{position:static;padding:20px 24px}
+
+/* O Canvas cancela as transformações da folha; o hover compartilha as mesmas curvas. */
+#sonic-field{transform-origin:0 0}
+.story-visual{position:relative;isolation:isolate}
+.wind-image-tint{position:absolute;inset:0;z-index:1;pointer-events:none;background:#246a8e;opacity:0;mix-blend-mode:multiply;-webkit-mask-image:var(--image-wind-mask);mask-image:var(--image-wind-mask);-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.wind-image-active .wind-image-tint{opacity:.62}
+.story-visual figcaption{z-index:2}
+
+#project-title,#category{pointer-events:auto}
+
+/* A leitura fica abaixo do título; as setas laterais continuam separadas. */
+#gallery #more{margin-top:14px;display:inline-flex;align-items:center;gap:14px;min-height:44px}
+#more .more-arrow{font-size:22px;line-height:1}
+.gallery-actions{align-self:flex-end}
+@media(max-width:700px){.gallery-bottom{gap:18px}.gallery-actions{align-self:flex-start}.gallery-actions p{margin-bottom:10px}.slide{padding-bottom:36vh}}
+
+/* Movimento editorial: deriva visível, profundidade e assentamento na leitura. */
+@keyframes wind{0%,100%{transform:translate3d(-10px,10px,0) rotate(var(--tilt))}35%{transform:translate3d(22px,-24px,0) rotate(calc(var(--tilt) + 2deg))}70%{transform:translate3d(-18px,-8px,0) rotate(calc(var(--tilt) - 1.6deg))}}
+@keyframes cover-float{0%,100%{transform:translate3d(-8px,12px,0) rotate(-.55deg)}50%{transform:translate3d(12px,-22px,0) rotate(.55deg)}}
+.story-visual img{transform-origin:50% 50%}
+#gallery-stage{perspective:1100px}
+@media(max-width:760px){@keyframes wind{0%,100%{transform:translate3d(-4px,6px,0) rotate(var(--tilt))}35%{transform:translate3d(9px,-12px,0) rotate(calc(var(--tilt) + 1.2deg))}70%{transform:translate3d(-8px,-4px,0) rotate(calc(var(--tilt) - 1deg))}}@keyframes cover-float{0%,100%{transform:translate3d(-4px,7px,0) rotate(-.3deg)}50%{transform:translate3d(5px,-13px,0) rotate(.3deg)}}}
+@media(prefers-reduced-motion:reduce){.story-block,.story-block.is-seen{opacity:1!important}.story-visual img{transform:none!important}}
+
+/* Le premier projet devient directement la première couverture plein écran. */
+.zoom-cover.slide{position:fixed;inset:0;width:100vw;height:100dvh;z-index:4;pointer-events:none;overflow:hidden;will-change:clip-path}
+.zoom-cover.slide .cover-word{animation:none!important;transform-origin:0 0;will-change:transform}
+.zoom-expanding .project-map .card{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){.zoom-cover.slide,.zoom-cover.slide .cover-word{will-change:auto}}
+
+/* Mapa com sete capas: rótulos e títulos cabem no celular. */
+@media(max-width:700px){.project-map .grid.expanded-map .card{padding:10px}.project-map .grid.expanded-map .cover-word{margin-top:8px;line-height:.98}.project-map .grid.expanded-map .card-bottom{display:none}.project-map .grid.expanded-map .card-summary{font-size:12px;left:6px;right:6px;bottom:6px;padding:8px}.project-map .grid.expanded-map .card .card-summary{opacity:0}.project-map .grid.expanded-map .card:is(:hover,:focus-visible) .card-summary{opacity:1}}

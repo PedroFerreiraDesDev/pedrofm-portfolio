@@ -1,0 +1,14 @@
+/* Ar e profundidade, sem motor 3D. O hover colore somente a regiao do ponteiro. */
+.tilt-surface{width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
+.project-map .card.is-resonating{animation:wind 13s ease-in-out infinite!important;outline:none!important}
+#name-link.is-resonating{animation:none!important}
+.project-map .card:is(:hover,:focus-visible) .card-face{filter:none!important}
+.card-hover-tint{background:radial-gradient(circle 150px at var(--sx,50%) var(--sy,50%),#e5ff5448,transparent 75%)}
+#gallery-stage .slide{--hot:0}
+#gallery-stage .slide::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle 160px at var(--sx,50%) var(--sy,50%),#ffffff38,transparent 75%);opacity:var(--hot,0)}
+#track{transition:transform 1.12s cubic-bezier(.16,.84,.2,1)}
+#gallery:not(.reading){animation-duration:.85s}
+@media(prefers-reduced-motion:reduce){.tilt-surface{transform:none!important;will-change:auto}#track{transition:none!important}}
+
+.tilt-surface{transition:transform .35s cubic-bezier(.2,.75,.2,1)}
+@media(prefers-reduced-motion:reduce){.tilt-surface{transition:none!important}}

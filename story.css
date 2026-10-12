@@ -1,0 +1,34 @@
+/* Balanco continuo: o hover altera a velocidade, sem reiniciar a fase. */
+.project-map .card,.project-map .card.is-resonating{animation:wind var(--float-period,12s) ease-in-out infinite!important;animation-delay:var(--float-offset,0s)!important;animation-play-state:running!important}
+.map-node:nth-child(1){--float-period:11s;--float-offset:-2s}.map-node:nth-child(2){--float-period:13s;--float-offset:-7s}.map-node:nth-child(3){--float-period:12s;--float-offset:-5s}.map-node:nth-child(4){--float-period:14s;--float-offset:-10s}
+.project-map .grid.motion-paused .card{animation-play-state:paused!important}
+.tilt-surface{transform:none!important;transition:none!important;will-change:auto}
+#name-link.is-resonating{animation:none!important}
+.slide .cover-word,.slide .cover-image{animation:cover-float 12s ease-in-out infinite;transform-origin:center;will-change:transform}
+.slide:nth-child(2n) .cover-word{animation-delay:-5s;animation-duration:14s}
+#gallery.reading .cover-word{animation-play-state:paused}
+@keyframes cover-float{0%,100%{transform:translate3d(0,4px,0) rotate(-.18deg)}50%{transform:translate3d(0,-8px,0) rotate(.18deg)}}
+.story-block{opacity:0;transform:translate3d(0,52px,0);transition:opacity .85s ease,transform 1.1s cubic-bezier(.18,.75,.2,1)}
+.story-block.is-seen{opacity:1;transform:translate3d(0,var(--travel,0px),0)}
+.story-visual{margin:80px 0 100px;min-height:360px;aspect-ratio:4/3;padding:35px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;border-radius:2px;color:#101010}
+.story-visual figcaption{font:12px monospace;letter-spacing:1px}
+.story-visual .visual-placeholder{font-size:clamp(32px,4vw,58px);font-weight:800;line-height:1;letter-spacing:-.04em;max-width:500px}
+.story-visual img{display:block;width:100%;height:100%;object-fit:cover}
+@media(max-width:700px){.story-visual{margin:55px 0 75px;min-height:240px;padding:24px}}
+@media(prefers-reduced-motion:reduce){.project-map .card,.project-map .card.is-resonating,.slide .cover-word,.slide .cover-image{animation:none!important;will-change:auto}.story-block{opacity:1;transform:none!important;transition:none!important}}
+
+/* A superfície levanta como papel; a tipografia recebe apenas ondas de tinta. */
+#gallery:not(.reading){animation:none!important}
+#gallery-stage{perspective:1400px;background:#101010}
+#paper-plane{position:relative;width:100%;height:100%;transform-origin:50% 78%;will-change:transform}
+#paper-plane #track{height:100%}
+.card-hover-tint,#gallery-stage .slide::after{display:none!important}
+.cover-word{position:relative}
+.story-block,.story-block.is-seen{opacity:1;transition:transform .22s ease-out;transform:translate3d(0,0,0)}
+@keyframes wind{0%,100%{transform:translate3d(-5px,5px,0) rotate(var(--tilt))}35%{transform:translate3d(11px,-11px,0) rotate(calc(var(--tilt) + 1deg))}70%{transform:translate3d(-9px,-3px,0) rotate(calc(var(--tilt) - .8deg))}}
+@media(prefers-reduced-motion:reduce){#paper-plane{transform:none!important;will-change:auto}.cover-word::after{mask-image:none;-webkit-mask-image:none}.story-block{transform:none!important;transition:none!important}}
+
+.project-map .grid{perspective:1200px}
+.map-node{--paper-angle:-7deg;transform:translate3d(calc(var(--entry-x) * var(--outside)),calc(var(--entry-y) * var(--outside)),0) rotateX(calc(12deg * var(--outside))) rotateZ(calc(var(--paper-angle) * var(--outside)));transform-origin:50% 75%}
+.map-node:nth-child(2n){--paper-angle:7deg}
+@media(prefers-reduced-motion:reduce){.map-node{transform:translate3d(calc(var(--entry-x) * var(--outside)),calc(var(--entry-y) * var(--outside)),0)}}

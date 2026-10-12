@@ -1,0 +1,14 @@
+/* Tela inicial: somente projetos. Posicoes estaticas; zoom e vento usam transform. */
+body.map-mode{height:100dvh;overflow:hidden;overscroll-behavior:none}
+.project-map{position:fixed;inset:0;width:100%;height:100dvh;min-height:0;max-height:none;overflow:hidden;touch-action:none;overscroll-behavior:none}
+.project-map .grid{animation:none!important;transform-origin:center;will-change:transform}
+.project-map .card:nth-child(1){left:9%;top:10%}
+.project-map .card:nth-child(2){left:61%;top:6%}
+.project-map .card:nth-child(3){left:16%;top:57%}
+.project-map .card:nth-child(4){left:64%;top:54%}
+.project-map .grid.motion-paused .card{animation-play-state:paused;will-change:auto}
+.project-map .grid.motion-paused{will-change:auto}
+#lens{left:0;top:0;will-change:transform}
+@media(max-width:700px){.project-map .card:nth-child(1){left:5%;top:13%}.project-map .card:nth-child(2){left:54%;top:18%}.project-map .card:nth-child(3){left:6%;top:57%}.project-map .card:nth-child(4){left:53%;top:62%}.project-map .card{height:clamp(160px,26dvh,220px)}#lens{left:0!important;top:0!important;transform:translate3d(calc(50vw - 130px),25dvh,0)!important}}
+@media(max-height:500px) and (min-width:701px){.project-map .card{height:36dvh;min-height:0;padding:16px}.project-map .card .cover-word{font-size:clamp(28px,4vw,48px);margin-top:16px}.project-map .card small,.project-map .card-bottom{display:none}}
+@media(prefers-reduced-motion:reduce){.project-map .grid{will-change:auto}.project-map .card{will-change:auto}}

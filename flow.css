@@ -1,0 +1,29 @@
+/* Revelacao e leitura continua: a capa e o inicio do estudo, na mesma superficie. */
+#name-intro{position:absolute;left:5%;top:50%;width:90%;text-align:center;z-index:3;transform-origin:center;will-change:transform}
+#name-intro h1{margin:0;line-height:.9;font-size:clamp(76px,15vw,230px);letter-spacing:-.075em}
+#name-link{background:none;border:0;color:#f4f4ec;font-size:inherit;font-weight:900;letter-spacing:inherit;padding:0;line-height:inherit}
+#name-link:hover{color:#e5ff54}
+#name-intro p{font:14px monospace;letter-spacing:3px;margin:28px 0 15px;opacity:var(--phrase-opacity,1)}
+#name-intro>span{font-size:16px;line-height:1.5;color:#aaa;display:block;opacity:var(--phrase-opacity,1)}
+#name-intro{margin-top:-100px}
+.project-map .grid{--outside:1;opacity:0}
+.map-node{position:absolute;width:28%;max-width:440px;height:clamp(210px,29vh,330px);transform:translate3d(calc(var(--entry-x) * var(--outside)),calc(var(--entry-y) * var(--outside)),0);will-change:transform}
+.map-node:nth-child(1){left:9%;top:17%}.map-node:nth-child(2){left:61%;top:13%}.map-node:nth-child(3){left:16%;top:61%}.map-node:nth-child(4){left:64%;top:58%}
+.project-map .map-node .card{width:100%;height:100%;max-width:none;left:0;top:0}
+.map-node:nth-child(1) .card{--tilt:-4deg;animation-duration:11s;animation-delay:-2s}.map-node:nth-child(2) .card{--tilt:3deg;animation-duration:13s;animation-delay:-7s}.map-node:nth-child(3) .card{--tilt:2deg;animation-duration:12s;animation-delay:-5s}.map-node:nth-child(4) .card{--tilt:-3deg;animation-duration:14s;animation-delay:-10s}
+#gallery{overflow-x:hidden;overflow-y:auto;touch-action:pan-y;overscroll-behavior:none;scrollbar-width:none;scroll-behavior:smooth}
+#gallery::-webkit-scrollbar{display:none}
+#gallery-stage{position:relative;height:100dvh;min-height:100dvh;overflow:hidden;cursor:pointer;isolation:isolate}
+#track{height:100%;width:100%}
+#case{max-width:none;margin:0;padding:0;background:#101010;color:#f4f4ec;min-height:100dvh}
+.detail-inner{max-width:1100px;margin:auto;padding:80px 5vw 100px}
+#case h1{font-size:clamp(42px,6vw,90px);margin:24px 0 48px;line-height:1.03}
+#case .lead{font-size:24px}
+#case .back{background:none;color:inherit;font-size:14px;margin:0 10px 10px 0;cursor:pointer}
+#gallery:not(.reading){animation:enter-gallery .55s cubic-bezier(.2,.8,.2,1) both}
+#gallery.reading #lens{display:none}
+.gallery-bottom{pointer-events:none}.gallery-bottom button{pointer-events:auto}
+@keyframes enter-gallery{from{opacity:.25;transform:scale(.975)}to{opacity:1;transform:scale(1)}}
+@media(max-width:700px){#name-intro{margin-top:-70px}#name-intro h1{font-size:22vw}#name-intro p{font-size:12px;letter-spacing:2px;margin-top:24px}#name-intro>span{font-size:14px}.map-node{width:41%;height:clamp(165px,26dvh,220px)}.map-node:nth-child(1){left:5%;top:21%}.map-node:nth-child(2){left:54%;top:25%}.map-node:nth-child(3){left:6%;top:62%}.map-node:nth-child(4){left:53%;top:67%}.gallery-bottom h2{font-size:20px}.detail-inner{padding:50px 6vw 80px}}
+@media(max-height:500px) and (min-width:701px){.map-node{height:30dvh}#name-intro{margin-top:-60px}#name-intro h1{font-size:13vw}#name-intro>span{display:none}}
+@media(prefers-reduced-motion:reduce){#name-intro,.map-node{will-change:auto}#gallery{scroll-behavior:auto}}

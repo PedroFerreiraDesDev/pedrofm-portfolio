@@ -1,0 +1,27 @@
+/* MAPA: mantém as cores e os retângulos originais, com posições livres.
+   Ajuste left/top para distribuir as capas; duration/delay para o vento. */
+.project-map{position:relative;height:calc(100svh - 90px);min-height:680px;max-height:1050px;overflow:hidden}
+.project-map .grid{position:absolute;inset:0;display:block;padding:0;animation:map-approach 1.6s cubic-bezier(.2,.7,.2,1) both;transform-origin:50% 50%}
+.project-map .card{position:absolute;width:27%;max-width:420px;height:clamp(220px,28vh,310px);min-height:0;padding:24px;transform-origin:center;animation:wind 10s ease-in-out infinite;will-change:transform;box-shadow:0 22px 50px #0003}
+.project-map .card:nth-child(1){left:5%;top:5%;--tilt:-4deg;animation-duration:11s;animation-delay:-2s}
+.project-map .card:nth-child(2){left:63%;top:2%;--tilt:3deg;animation-duration:13s;animation-delay:-7s}
+.project-map .card:nth-child(3){left:13%;top:59%;--tilt:2deg;animation-duration:12s;animation-delay:-5s}
+.project-map .card:nth-child(4){left:66%;top:57%;--tilt:-3deg;animation-duration:14s;animation-delay:-10s}
+.project-map .card:hover,.project-map .card:focus-visible{animation-play-state:paused;box-shadow:0 25px 65px #0008;z-index:2}
+.project-map .card .cover-word{font-size:clamp(40px,4.5vw,72px);margin-top:36px}
+.project-map .card .n{font-size:11px}.project-map .card small{font-size:9px;top:24px;right:20px}.project-map .card-bottom{left:24px;right:24px;bottom:20px;font-size:9px}
+.project-map .intro{position:absolute;left:35%;top:36%;width:30%;padding:0;text-align:center;pointer-events:none;z-index:1}
+.project-map .intro .eyebrow{font-size:9px;letter-spacing:1.3px;margin:0 0 16px}
+.project-map h1{font-size:clamp(40px,4.5vw,75px);line-height:.92;margin:0 0 16px;letter-spacing:-.06em}
+.map-subtitle{font-size:13px;line-height:1.5;color:#b7b7b7;margin:0}
+.map-caption{position:absolute;bottom:10px;left:4vw;right:4vw;display:flex;align-items:center;justify-content:space-between;font:11px/1.5 monospace;letter-spacing:.5px;min-height:40px}
+.map-caption p{color:#c2c2c2}.map-coordinate{color:#929292}.map-caption button{font-size:11px}
+@keyframes map-approach{from{transform:scale(.8);opacity:.7}to{transform:scale(1);opacity:1}}
+/* Pequena deriva com ritmos diferentes: o movimento não impede o clique. */
+@keyframes wind{0%,100%{transform:translate3d(-3px,3px,0) rotate(var(--tilt))}35%{transform:translate3d(7px,-7px,0) rotate(calc(var(--tilt) + .7deg))}70%{transform:translate3d(-6px,-2px,0) rotate(calc(var(--tilt) - .5deg))}}
+@media(max-width:900px){.project-map .card{width:29%;padding:20px}.project-map .card .cover-word{font-size:clamp(35px,5vw,55px)}.project-map .card small{display:none}.project-map .card .n{font-size:10px}.project-map .card-bottom{left:20px;right:20px;font-size:8px}.project-map .card-bottom span:last-child{display:none}.project-map .intro .eyebrow{font-size:8px}}
+@media(max-width:700px){.project-map{height:calc(100svh - 75px);min-height:650px;max-height:900px}.project-map .card{width:41%;height:180px;padding:16px}.project-map .card:nth-child(1){left:5%;top:5%}.project-map .card:nth-child(2){left:54%;top:9%}.project-map .card:nth-child(3){left:5%;top:61%}.project-map .card:nth-child(4){left:54%;top:65%}.project-map .card .n{font-size:8px;letter-spacing:0}.project-map .card .cover-word{font-size:clamp(28px,8vw,46px);margin-top:24px}.project-map .card-bottom{left:16px;right:16px;bottom:16px;font-size:7px}.project-map .intro{left:12%;top:37%;width:76%}.project-map h1{font-size:50px;margin-bottom:12px}.project-map .intro .eyebrow{font-size:8px;margin-bottom:12px}.map-subtitle{font-size:12px}.map-caption{bottom:0;font-size:9px;gap:12px}.map-coordinate{display:none}.map-caption p{max-width:180px}.map-caption button{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.project-map .grid,.project-map .card{animation:none!important}.project-map .card{transform:rotate(var(--tilt))}}
+/* Metadados continuam legíveis dentro das capas, inclusive no celular. */
+.project-map .card .n,.project-map .card-bottom{font-size:12px}.project-map .card small{font-size:12px}.project-map .card-bottom span:last-child{display:none}
+@media(max-width:700px){.project-map .card .n{display:block;max-width:100%;line-height:1.25}.project-map .card .cover-word{margin-top:18px}.project-map .card-bottom{font-size:12px}}
