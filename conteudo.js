@@ -1,4 +1,4 @@
-/* Conteúdo editável. Materiais provisórios devem ser substituídos antes de apresentar resultados. */
+/* Projetos editáveis. Consulte PADRAO-DOS-PROJETOS.md antes de duplicar. */
 const portfolioData = {
   "projects": [
     {
@@ -30,7 +30,8 @@ const portfolioData = {
           "title": "O ponto de partida.",
           "pending": true,
           "paragraphs": [
-            "Inserir o contexto real, o público, o desafio e as restrições deste projeto."
+            "Apresentar a marca, seu público e a necessidade que motivou o trabalho de identidade.",
+            "Documentar o contexto, os objetivos e as restrições com informações verificáveis."
           ],
           "imageSide": "right",
           "image": {
@@ -46,7 +47,8 @@ const portfolioData = {
           "title": "Por trás da forma.",
           "pending": true,
           "paragraphs": [
-            "Apresentar decisões, alternativas e consequências com registros de processo autorizados."
+            "Relacionar as escolhas de tipografia, cor e construção gráfica ao posicionamento pretendido.",
+            "Inserir registros de processo que permitam relacionar o raciocínio à solução visual."
           ],
           "imageSide": "left",
           "image": {
@@ -59,21 +61,79 @@ const portfolioData = {
         },
         {
           "type": "text",
+          "title": "Reconhecer antes de explicar.",
+          "pending": true,
+          "paragraphs": [
+            "Esta pausa receberá a ideia central do projeto, explicada em poucas frases e ligada ao desafio apresentado.",
+            "A intenção é revelar uma escolha concreta, acompanhada da evidência que a sustenta."
+          ]
+        },
+        {
+          "type": "pair",
+          "title": "Uma identidade que se conecta.",
+          "pending": true,
+          "paragraphs": [
+            "Relacionar as escolhas de tipografia, cor e construção gráfica ao posicionamento pretendido.",
+            "Mostrar a relação entre os elementos do sistema e o uso previsto para cada um."
+          ],
+          "imageSide": "right",
+          "image": {
+            "src": "assets/identidade-estudo-3.svg",
+            "alt": "Composição abstrata provisória para branding, sem representar um trabalho realizado",
+            "caption": "03 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "image",
+          "image": {
+            "src": "assets/identidade-estudo-4.svg",
+            "alt": "Composição abstrata provisória para branding, sem representar um trabalho realizado",
+            "caption": "04 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 1200,
+            "height": 800
+          }
+        },
+        {
+          "type": "pair",
+          "title": "O detalhe também identifica.",
+          "pending": true,
+          "paragraphs": [
+            "Apresentar aplicações autorizadas da identidade em diferentes pontos de contato.",
+            "Aproximar um detalhe que ajude a compreender uma decisão importante do trabalho."
+          ],
+          "imageSide": "left",
+          "image": {
+            "src": "assets/identidade-estudo-5.svg",
+            "alt": "Composição abstrata provisória para branding, sem representar um trabalho realizado",
+            "caption": "05 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "text",
           "title": "Resultado e aprendizado.",
           "pending": true,
           "paragraphs": [
-            "Incluir aplicações reais, evidências e aprendizados. Não serão inventados resultados comerciais."
+            "Apresentar resultados comprovados e aprendizados. Quando não houver métricas disponíveis, registrar observações documentadas, sem inventar desempenho."
           ]
         },
         {
           "type": "text",
-          "title": "Créditos.",
+          "title": "Autoria e créditos.",
           "pending": true,
           "paragraphs": [
-            "Confirmar autoria, equipe, fontes e autorização de exposição."
+            "Confirmar o papel de Pedro, a equipe, os colaboradores e as autorizações dos materiais apresentados."
           ]
         }
-      ]
+      ],
+      "sequenceTitle": [
+        "Uma ideia,",
+        "muitas formas."
+      ],
+      "lead": "Estudo em preparação. Apresentar a marca, seu público e a necessidade que motivou o trabalho de identidade. Os materiais abaixo são composições provisórias e serão substituídos por registros reais e autorizados."
     },
     {
       "id": "direcao",
@@ -104,7 +164,8 @@ const portfolioData = {
           "title": "O ponto de partida.",
           "pending": true,
           "paragraphs": [
-            "Inserir o contexto real, o público, o desafio e as restrições deste projeto."
+            "Explicar o objetivo da produção, a mensagem e a responsabilidade de Pedro na direção criativa.",
+            "Documentar o contexto, os objetivos e as restrições com informações verificáveis."
           ],
           "imageSide": "right",
           "image": {
@@ -120,7 +181,8 @@ const portfolioData = {
           "title": "Por trás da forma.",
           "pending": true,
           "paragraphs": [
-            "Apresentar decisões, alternativas e consequências com registros de processo autorizados."
+            "Mostrar referências, alternativas de linguagem e decisões de composição, luz ou narrativa.",
+            "Inserir registros de processo que permitam relacionar o raciocínio à solução visual."
           ],
           "imageSide": "left",
           "image": {
@@ -133,21 +195,79 @@ const portfolioData = {
         },
         {
           "type": "text",
+          "title": "A intenção conduz a imagem.",
+          "pending": true,
+          "paragraphs": [
+            "Esta pausa receberá a ideia central do projeto, explicada em poucas frases e ligada ao desafio apresentado.",
+            "A intenção é revelar uma escolha concreta, acompanhada da evidência que a sustenta."
+          ]
+        },
+        {
+          "type": "pair",
+          "title": "Uma direção compartilhada.",
+          "pending": true,
+          "paragraphs": [
+            "Mostrar referências, alternativas de linguagem e decisões de composição, luz ou narrativa.",
+            "Mostrar a relação entre os elementos do sistema e o uso previsto para cada um."
+          ],
+          "imageSide": "right",
+          "image": {
+            "src": "assets/direcao-estudo-3.svg",
+            "alt": "Composição abstrata provisória para direção criativa, sem representar um trabalho realizado",
+            "caption": "03 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "image",
+          "image": {
+            "src": "assets/direcao-estudo-4.svg",
+            "alt": "Composição abstrata provisória para direção criativa, sem representar um trabalho realizado",
+            "caption": "04 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 1200,
+            "height": 800
+          }
+        },
+        {
+          "type": "pair",
+          "title": "Dentro de cada enquadramento.",
+          "pending": true,
+          "paragraphs": [
+            "Apresentar peças finais e bastidores autorizados, identificando a contribuição da equipe.",
+            "Aproximar um detalhe que ajude a compreender uma decisão importante do trabalho."
+          ],
+          "imageSide": "left",
+          "image": {
+            "src": "assets/direcao-estudo-5.svg",
+            "alt": "Composição abstrata provisória para direção criativa, sem representar um trabalho realizado",
+            "caption": "05 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "text",
           "title": "Resultado e aprendizado.",
           "pending": true,
           "paragraphs": [
-            "Incluir aplicações reais, evidências e aprendizados. Não serão inventados resultados comerciais."
+            "Apresentar resultados comprovados e aprendizados. Quando não houver métricas disponíveis, registrar observações documentadas, sem inventar desempenho."
           ]
         },
         {
           "type": "text",
-          "title": "Créditos.",
+          "title": "Autoria e créditos.",
           "pending": true,
           "paragraphs": [
-            "Confirmar autoria, equipe, fontes e autorização de exposição."
+            "Confirmar o papel de Pedro, a equipe, os colaboradores e as autorizações dos materiais apresentados."
           ]
         }
-      ]
+      ],
+      "sequenceTitle": [
+        "Uma visão,",
+        "muitas escolhas."
+      ],
+      "lead": "Estudo em preparação. Explicar o objetivo da produção, a mensagem e a responsabilidade de Pedro na direção criativa. Os materiais abaixo são composições provisórias e serão substituídos por registros reais e autorizados."
     },
     {
       "id": "editorial",
@@ -178,7 +298,8 @@ const portfolioData = {
           "title": "O ponto de partida.",
           "pending": true,
           "paragraphs": [
-            "Inserir o contexto real, o público, o desafio e as restrições deste projeto."
+            "Apresentar a publicação, o público leitor, o conteúdo e as restrições de formato.",
+            "Documentar o contexto, os objetivos e as restrições com informações verificáveis."
           ],
           "imageSide": "right",
           "image": {
@@ -194,7 +315,8 @@ const portfolioData = {
           "title": "Por trás da forma.",
           "pending": true,
           "paragraphs": [
-            "Apresentar decisões, alternativas e consequências com registros de processo autorizados."
+            "Explicar como tipografia, hierarquia, grid e sequência de páginas orientam a leitura.",
+            "Inserir registros de processo que permitam relacionar o raciocínio à solução visual."
           ],
           "imageSide": "left",
           "image": {
@@ -207,21 +329,79 @@ const portfolioData = {
         },
         {
           "type": "text",
+          "title": "A leitura também tem ritmo.",
+          "pending": true,
+          "paragraphs": [
+            "Esta pausa receberá a ideia central do projeto, explicada em poucas frases e ligada ao desafio apresentado.",
+            "A intenção é revelar uma escolha concreta, acompanhada da evidência que a sustenta."
+          ]
+        },
+        {
+          "type": "pair",
+          "title": "Um sistema para a leitura.",
+          "pending": true,
+          "paragraphs": [
+            "Explicar como tipografia, hierarquia, grid e sequência de páginas orientam a leitura.",
+            "Mostrar a relação entre os elementos do sistema e o uso previsto para cada um."
+          ],
+          "imageSide": "right",
+          "image": {
+            "src": "assets/editorial-estudo-3.svg",
+            "alt": "Composição abstrata provisória para design editorial, sem representar um trabalho realizado",
+            "caption": "03 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "image",
+          "image": {
+            "src": "assets/editorial-estudo-4.svg",
+            "alt": "Composição abstrata provisória para design editorial, sem representar um trabalho realizado",
+            "caption": "04 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 1200,
+            "height": 800
+          }
+        },
+        {
+          "type": "pair",
+          "title": "Aproximar para compreender.",
+          "pending": true,
+          "paragraphs": [
+            "Apresentar capa, aberturas e páginas em sequência, preservando a legibilidade.",
+            "Aproximar um detalhe que ajude a compreender uma decisão importante do trabalho."
+          ],
+          "imageSide": "left",
+          "image": {
+            "src": "assets/editorial-estudo-5.svg",
+            "alt": "Composição abstrata provisória para design editorial, sem representar um trabalho realizado",
+            "caption": "05 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "text",
           "title": "Resultado e aprendizado.",
           "pending": true,
           "paragraphs": [
-            "Incluir aplicações reais, evidências e aprendizados. Não serão inventados resultados comerciais."
+            "Apresentar resultados comprovados e aprendizados. Quando não houver métricas disponíveis, registrar observações documentadas, sem inventar desempenho."
           ]
         },
         {
           "type": "text",
-          "title": "Créditos.",
+          "title": "Autoria e créditos.",
           "pending": true,
           "paragraphs": [
-            "Confirmar autoria, equipe, fontes e autorização de exposição."
+            "Confirmar o papel de Pedro, a equipe, os colaboradores e as autorizações dos materiais apresentados."
           ]
         }
-      ]
+      ],
+      "sequenceTitle": [
+        "Entre páginas,",
+        "uma narrativa."
+      ],
+      "lead": "Estudo em preparação. Apresentar a publicação, o público leitor, o conteúdo e as restrições de formato. Os materiais abaixo são composições provisórias e serão substituídos por registros reais e autorizados."
     },
     {
       "id": "experiencia",
@@ -351,7 +531,11 @@ const portfolioData = {
           ]
         }
       ],
-      "lead": "Um espaço para revelar o resultado e as escolhas que o tornaram possível. Este estudo está em preparação: imagens, contexto e evidências serão substituídos pelos materiais reais do projeto."
+      "lead": "Um espaço para revelar o resultado e as escolhas que o tornaram possível. Este estudo está em preparação: imagens, contexto e evidências serão substituídos pelos materiais reais do projeto.",
+      "sequenceTitle": [
+        "O invisível",
+        "move a forma."
+      ]
     },
     {
       "id": "social-identidade",
@@ -376,32 +560,115 @@ const portfolioData = {
           "value": "A confirmar"
         }
       ],
-      "lead": "Espaço reservado para um projeto real de identidade aplicada às redes sociais.",
+      "lead": "Estudo em preparação. Identificar a marca, o público e os canais envolvidos no projeto de identidade para redes sociais. Os materiais abaixo são composições provisórias e serão substituídos por registros reais e autorizados.",
       "sections": [
         {
-          "type": "text",
-          "title": "O desafio.",
+          "type": "pair",
+          "title": "O ponto de partida.",
           "pending": true,
           "paragraphs": [
-            "Inserir o contexto real da marca, o público, os canais e o desafio de comunicação."
+            "Identificar a marca, o público e os canais envolvidos no projeto de identidade para redes sociais.",
+            "Documentar o contexto, os objetivos e as restrições com informações verificáveis."
+          ],
+          "imageSide": "right",
+          "image": {
+            "src": "assets/social-identidade-estudo-1.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "01 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "pair",
+          "title": "Por trás da forma.",
+          "pending": true,
+          "paragraphs": [
+            "Mostrar como o sistema adapta tipografia, imagem e hierarquia aos diferentes formatos.",
+            "Inserir registros de processo que permitam relacionar o raciocínio à solução visual."
+          ],
+          "imageSide": "left",
+          "image": {
+            "src": "assets/social-identidade-estudo-2.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "02 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "text",
+          "title": "Consistência em movimento.",
+          "pending": true,
+          "paragraphs": [
+            "Esta pausa receberá a ideia central do projeto, explicada em poucas frases e ligada ao desafio apresentado.",
+            "A intenção é revelar uma escolha concreta, acompanhada da evidência que a sustenta."
+          ]
+        },
+        {
+          "type": "pair",
+          "title": "Um sistema para os canais.",
+          "pending": true,
+          "paragraphs": [
+            "Mostrar como o sistema adapta tipografia, imagem e hierarquia aos diferentes formatos.",
+            "Mostrar a relação entre os elementos do sistema e o uso previsto para cada um."
+          ],
+          "imageSide": "right",
+          "image": {
+            "src": "assets/social-identidade-estudo-3.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "03 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "image",
+          "image": {
+            "src": "assets/social-identidade-estudo-4.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "04 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 1200,
+            "height": 800
+          }
+        },
+        {
+          "type": "pair",
+          "title": "O formato muda a leitura.",
+          "pending": true,
+          "paragraphs": [
+            "Apresentar um conjunto real de peças, com formatos e funções editoriais identificados.",
+            "Aproximar um detalhe que ajude a compreender uma decisão importante do trabalho."
+          ],
+          "imageSide": "left",
+          "image": {
+            "src": "assets/social-identidade-estudo-5.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "05 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "text",
+          "title": "Resultado e aprendizado.",
+          "pending": true,
+          "paragraphs": [
+            "Apresentar resultados comprovados e aprendizados. Quando não houver métricas disponíveis, registrar observações documentadas, sem inventar desempenho."
           ]
         },
         {
           "type": "text",
-          "title": "O sistema visual.",
+          "title": "Autoria e créditos.",
           "pending": true,
           "paragraphs": [
-            "Explicar as decisões de tipografia, imagem e composição e como elas orientam os formatos. Acrescentar aplicações e registros de processo autorizados."
-          ]
-        },
-        {
-          "type": "text",
-          "title": "Resultado e créditos.",
-          "pending": true,
-          "paragraphs": [
-            "Adicionar materiais publicados, participação de Pedro, equipe e resultados comprovados. As imagens do projeto ainda serão selecionadas."
+            "Confirmar o papel de Pedro, a equipe, os colaboradores e as autorizações dos materiais apresentados."
           ]
         }
+      ],
+      "sequenceTitle": [
+        "Uma marca,",
+        "muitas conversas."
       ]
     },
     {
@@ -427,32 +694,115 @@ const portfolioData = {
           "value": "A confirmar"
         }
       ],
-      "lead": "Espaço reservado para uma campanha real de conteúdo para redes sociais.",
+      "lead": "Estudo em preparação. Apresentar o objetivo da campanha, o público, o período e a participação de Pedro. Os materiais abaixo são composições provisórias e serão substituídos por registros reais e autorizados.",
       "sections": [
         {
-          "type": "text",
-          "title": "O objetivo da campanha.",
+          "type": "pair",
+          "title": "O ponto de partida.",
           "pending": true,
           "paragraphs": [
-            "Registrar público, objetivo, contexto e restrições de um projeto real."
+            "Apresentar o objetivo da campanha, o público, o período e a participação de Pedro.",
+            "Documentar o contexto, os objetivos e as restrições com informações verificáveis."
+          ],
+          "imageSide": "right",
+          "image": {
+            "src": "assets/social-campanha-estudo-1.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "01 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "pair",
+          "title": "Por trás da forma.",
+          "pending": true,
+          "paragraphs": [
+            "Explicar a ideia central, o encadeamento das mensagens e a função de cada peça.",
+            "Inserir registros de processo que permitam relacionar o raciocínio à solução visual."
+          ],
+          "imageSide": "left",
+          "image": {
+            "src": "assets/social-campanha-estudo-2.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "02 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "text",
+          "title": "Cada peça abre uma conversa.",
+          "pending": true,
+          "paragraphs": [
+            "Esta pausa receberá a ideia central do projeto, explicada em poucas frases e ligada ao desafio apresentado.",
+            "A intenção é revelar uma escolha concreta, acompanhada da evidência que a sustenta."
+          ]
+        },
+        {
+          "type": "pair",
+          "title": "Uma narrativa em sequência.",
+          "pending": true,
+          "paragraphs": [
+            "Explicar a ideia central, o encadeamento das mensagens e a função de cada peça.",
+            "Mostrar a relação entre os elementos do sistema e o uso previsto para cada um."
+          ],
+          "imageSide": "right",
+          "image": {
+            "src": "assets/social-campanha-estudo-3.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "03 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "image",
+          "image": {
+            "src": "assets/social-campanha-estudo-4.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "04 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 1200,
+            "height": 800
+          }
+        },
+        {
+          "type": "pair",
+          "title": "Do primeiro contato à ação.",
+          "pending": true,
+          "paragraphs": [
+            "Mostrar os desdobramentos autorizados da campanha e seus formatos de publicação.",
+            "Aproximar um detalhe que ajude a compreender uma decisão importante do trabalho."
+          ],
+          "imageSide": "left",
+          "image": {
+            "src": "assets/social-campanha-estudo-5.svg",
+            "alt": "Composição abstrata provisória para redes sociais, sem representar um trabalho realizado",
+            "caption": "05 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "text",
+          "title": "Resultado e aprendizado.",
+          "pending": true,
+          "paragraphs": [
+            "Apresentar resultados comprovados e aprendizados. Quando não houver métricas disponíveis, registrar observações documentadas, sem inventar desempenho."
           ]
         },
         {
           "type": "text",
-          "title": "A construção da narrativa.",
+          "title": "Autoria e créditos.",
           "pending": true,
           "paragraphs": [
-            "Apresentar conceito, linguagem, roteiro e escolha de formatos, com evidências de processo autorizadas."
-          ]
-        },
-        {
-          "type": "text",
-          "title": "Desdobramentos e resultados.",
-          "pending": true,
-          "paragraphs": [
-            "Adicionar peças e vídeos, créditos e resultados reais. Distinguir propostas de conteúdos efetivamente publicados."
+            "Confirmar o papel de Pedro, a equipe, os colaboradores e as autorizações dos materiais apresentados."
           ]
         }
+      ],
+      "sequenceTitle": [
+        "Uma mensagem,",
+        "novos encontros."
       ]
     },
     {
@@ -478,32 +828,115 @@ const portfolioData = {
           "value": "A confirmar"
         }
       ],
-      "lead": "Espaço reservado para um projeto real de endomarketing e comunicação interna.",
+      "lead": "Estudo em preparação. Descrever o desafio de comunicação interna e as necessidades das pessoas, sem expor informações confidenciais. Os materiais abaixo são composições provisórias e serão substituídos por registros reais e autorizados.",
       "sections": [
         {
-          "type": "text",
-          "title": "O contexto e as pessoas.",
+          "type": "pair",
+          "title": "O ponto de partida.",
           "pending": true,
           "paragraphs": [
-            "Descrever o desafio de comunicação interna sem expor dados pessoais ou informações confidenciais."
-          ]
+            "Descrever o desafio de comunicação interna e as necessidades das pessoas, sem expor informações confidenciais.",
+            "Documentar o contexto, os objetivos e as restrições com informações verificáveis."
+          ],
+          "imageSide": "right",
+          "image": {
+            "src": "assets/endomarketing-estudo-1.svg",
+            "alt": "Composição abstrata provisória para endomarketing, sem representar um trabalho realizado",
+            "caption": "01 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "pair",
+          "title": "Por trás da forma.",
+          "pending": true,
+          "paragraphs": [
+            "Explicar o conceito, a linguagem e a escolha dos pontos de contato com o público interno.",
+            "Inserir registros de processo que permitam relacionar o raciocínio à solução visual."
+          ],
+          "imageSide": "left",
+          "image": {
+            "src": "assets/endomarketing-estudo-2.svg",
+            "alt": "Composição abstrata provisória para endomarketing, sem representar um trabalho realizado",
+            "caption": "02 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
         },
         {
           "type": "text",
-          "title": "Conceito e pontos de contato.",
+          "title": "Comunicar começa por ouvir.",
           "pending": true,
           "paragraphs": [
-            "Mostrar o raciocínio da campanha e as aplicações autorizadas nos canais internos ou nas ações presenciais."
+            "Esta pausa receberá a ideia central do projeto, explicada em poucas frases e ligada ao desafio apresentado.",
+            "A intenção é revelar uma escolha concreta, acompanhada da evidência que a sustenta."
           ]
+        },
+        {
+          "type": "pair",
+          "title": "Pontos de contato que conectam.",
+          "pending": true,
+          "paragraphs": [
+            "Explicar o conceito, a linguagem e a escolha dos pontos de contato com o público interno.",
+            "Mostrar a relação entre os elementos do sistema e o uso previsto para cada um."
+          ],
+          "imageSide": "right",
+          "image": {
+            "src": "assets/endomarketing-estudo-3.svg",
+            "alt": "Composição abstrata provisória para endomarketing, sem representar um trabalho realizado",
+            "caption": "03 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
+        },
+        {
+          "type": "image",
+          "image": {
+            "src": "assets/endomarketing-estudo-4.svg",
+            "alt": "Composição abstrata provisória para endomarketing, sem representar um trabalho realizado",
+            "caption": "04 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 1200,
+            "height": 800
+          }
+        },
+        {
+          "type": "pair",
+          "title": "Uma mensagem no cotidiano.",
+          "pending": true,
+          "paragraphs": [
+            "Apresentar somente materiais autorizados ou versões anonimizadas, sem dados internos da agência ou do cliente.",
+            "Aproximar um detalhe que ajude a compreender uma decisão importante do trabalho."
+          ],
+          "imageSide": "left",
+          "image": {
+            "src": "assets/endomarketing-estudo-5.svg",
+            "alt": "Composição abstrata provisória para endomarketing, sem representar um trabalho realizado",
+            "caption": "05 / MATERIAL PROVISÓRIO — IMAGEM REAL A INSERIR",
+            "width": 900,
+            "height": 1100
+          }
         },
         {
           "type": "text",
           "title": "Resultado e aprendizado.",
           "pending": true,
           "paragraphs": [
-            "Incluir somente evidências autorizadas e resultados comprovados. Confirmar autoria e equipe antes de publicar qualquer material interno."
+            "Apresentar resultados comprovados e aprendizados. Quando não houver métricas disponíveis, registrar observações documentadas, sem inventar desempenho."
+          ]
+        },
+        {
+          "type": "text",
+          "title": "Autoria e créditos.",
+          "pending": true,
+          "paragraphs": [
+            "Confirmar o papel de Pedro, a equipe, os colaboradores e as autorizações dos materiais apresentados."
           ]
         }
+      ],
+      "sequenceTitle": [
+        "Uma cultura,",
+        "muitas pessoas."
       ]
     },
     {

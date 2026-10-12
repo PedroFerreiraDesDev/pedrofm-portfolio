@@ -2,7 +2,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const r={};vm.createContext(r);vm.runInContext(read('render-conteudo.js'),r);const data=vm.runInNewContext(read('conteudo.js')+';portfolioData');
 const p=data.projects.find(p=>p.id==='experiencia'),html=r.renderProjectContent(p);
 assert.ok(html.includes('experience-flow'));assert.equal((html.match(/class="flow-picture"/g)||[]).length,4);assert.equal((html.match(/class="sequence-image"/g)||[]).length,1);assert.ok(!html.includes('resonance-band'));assert.ok(p.provisional);assert.ok(html.includes('MATERIAL PROVISÓRIO'));
-for(const p of data.projects.filter(p=>p.id!=='experiencia'))assert.ok(!r.renderProjectContent(p).includes('experience-flow'));
+for(const p of data.projects){const result=r.renderProjectContent(p);assert.equal(result.includes('experience-flow'),!p.about);if(!p.about){assert.equal((result.match(/class="flow-picture"/g)||[]).length,4);assert.equal((result.match(/class="sequence-image"/g)||[]).length,1);assert.ok(result.includes('data-resonance-project="'+p.id+'"'));assert.ok(result.includes(p.category));assert.ok(result.includes(p.sequenceTitle.join(' ')));}}
 const frames=[],events={},node=()=>({style:{},listeners:{},classList:{toggle(){},remove(){},contains:()=>false},addEventListener(k,f,options){this.listeners[k]=f;options?.signal?.addEventListener('abort',()=>delete this.listeners[k]);}});
 const gallery=node();gallery.scrollTop=0;gallery.clientHeight=900;gallery.hidden=false;gallery.getBoundingClientRect=()=>({top:0});
 const canvas=node(),air=node(),copy=node(),figure=node(),mesh=node(),photo=node(),row=node(),root=node();air.clientWidth=1200;air.querySelector=()=>canvas;mesh.clientWidth=600;mesh.clientHeight=750;
