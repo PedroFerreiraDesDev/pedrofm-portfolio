@@ -30,7 +30,7 @@
  }
  function schedule(){if(!frame)frame=requestAnimationFrame(draw);}
  function setup(){
-  blocks=[...details.querySelectorAll('.detail-inner > *:not(.story-pair), .story-pair > *')].map(node=>{node.classList.add('story-block','is-seen');return{node,top:0};});
+  blocks=[...details.querySelectorAll('.detail-inner > *:not(.story-pair):not(.discovery-lab), .story-pair > *')].map(node=>{node.classList.add('story-block','is-seen');return{node,top:0};});
   measure();schedule();
   if(previousHome&&!gallery.hidden&&!motion.matches&&!document.body.classList.contains('zoom-arrival')){
    entrance?.cancel();entrance=plane.animate([{transform:'translate3d(-12vw,26vh,0) rotateX(20deg) rotateZ(-7deg) scale(.86)'},{transform:'none'}],{duration:980,easing:'cubic-bezier(.16,.8,.2,1)'});

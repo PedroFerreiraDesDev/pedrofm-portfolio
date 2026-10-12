@@ -37,10 +37,18 @@ function renderContentBlock(block,index){
  if(block.type==='text')return '<section>'+textContentBlock(block)+'</section>';
  return '';
 }
+
+function discoveryContent(project){
+ if(project.about)return '';
+ const image=(project.sections||[]).map(b=>b.image).find(img=>img&&safeAsset(img.src));
+ const face=image?'<img src="'+escapeContent(image.src)+'" alt="" width="'+mediaDimension(image.width,720)+'" height="'+mediaDimension(image.height,900)+'" loading="lazy" decoding="async">':'<strong class="discovery-word">'+escapeContent(project.word).replaceAll('\n','<br>')+'</strong>';
+ const strips=Array.from({length:7},(_,i)=>'<div class="discovery-band" style="--band:'+i+'" aria-hidden="true">'+face+'</div>').join('');
+ return '<section class="discovery-lab" data-project="'+escapeContent(project.id)+'" style="--project-color:'+escapeContent(project.color)+'"><header class="discovery-heading"><p class="eyebrow">POR TRÁS DA FORMA</p><h2>A forma ganha movimento.</h2><p>Mova o ponteiro, experimente uma sintonia e descubra as camadas.</p></header><div class="discovery-controls" role="group" aria-label="Modo de descoberta"><button type="button" data-variant="layers" aria-pressed="true">Camadas</button><button type="button" data-variant="resonance" aria-pressed="false">Ressonância</button><button type="button" data-variant="journey" aria-pressed="false">Percurso</button><label>Intensidade <input class="discovery-frequency" type="range" min="0" max="100" value="45" aria-label="Intensidade do vento"></label></div><figure class="discovery-stage story-visual" aria-label="Composição interativa de camadas do projeto"><canvas class="discovery-wave" aria-hidden="true"></canvas><div class="discovery-deck"><div class="discovery-sheet discovery-back"><span>01 / O DESAFIO</span><strong>Onde tudo começa.</strong></div><div class="discovery-sheet discovery-middle"><span>02 / AS ESCOLHAS</span><strong>O que sustenta a forma.</strong></div><div class="discovery-sheet discovery-front">'+strips+'</div></div><figcaption>ESTUDO DE INTERAÇÃO · MATERIAL PROVISÓRIO</figcaption></figure><p class="discovery-note" aria-live="polite">Camadas: a superfície se abre e deixa as escolhas aparecerem.</p></section>';
+}
 function renderProjectContent(project){
  const metadata=Array.isArray(project.metadata)?project.metadata:[];
  const intro='<p class="eyebrow">'+escapeContent(project.category)+(project.provisional?' / CONTEÚDO EM PREPARAÇÃO':'')+'</p><h1>'+escapeContent(project.title)+'</h1>';
  const lead=project.lead?'<p class="lead">'+escapeContent(project.lead)+'</p>':'';
  const info=metadata.length?'<div class="metadata">'+metadata.map(item=>'<div><strong>'+escapeContent(item.label)+'</strong><p>'+escapeContent(item.value)+'</p></div>').join('')+'</div>':'';
- return '<div class="detail-inner">'+intro+lead+info+(project.sections||[]).map(renderContentBlock).join('')+'<button class="back" data-close>Voltar à capa</button>'+(project.about?'<a class="back" href="codigo.html">Consultar o código</a>':'')+'</div>';
+ return '<div class="detail-inner">'+intro+lead+info+discoveryContent(project)+(project.sections||[]).map(renderContentBlock).join('')+'<button class="back" data-close>Voltar à capa</button>'+(project.about?'<a class="back" href="codigo.html">Consultar o código</a>':'')+'</div>';
 }

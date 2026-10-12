@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "defaults": {
+    "amplitude": 30,
+    "depth": 90,
+    "frequency": 3,
+    "variant": "layers"
+  },
+  "projects": {
+    "identidade": {
+      "variant": "layers",
+      "amplitude": 30,
+      "depth": 90,
+      "frequency": 3
+    },
+    "direcao": {
+      "variant": "resonance",
+      "amplitude": 38,
+      "depth": 110,
+      "frequency": 4
+    },
+    "editorial": {
+      "variant": "journey",
+      "amplitude": 26,
+      "depth": 75,
+      "frequency": 5
+    },
+    "experiencia": {
+      "variant": "layers",
+      "amplitude": 30,
+      "depth": 90,
+      "frequency": 3
+    },
+    "social-identidade": {
+      "variant": "resonance",
+      "amplitude": 38,
+      "depth": 110,
+      "frequency": 4
+    },
+    "social-campanha": {
+      "variant": "journey",
+      "amplitude": 26,
+      "depth": 75,
+      "frequency": 5
+    },
+    "endomarketing": {
+      "variant": "layers",
+      "amplitude": 30,
+      "depth": 90,
+      "frequency": 3
+    }
+  }
+}

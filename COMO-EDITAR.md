@@ -85,3 +85,9 @@ As imagens atuais são espaços reservados, não trabalhos realizados. Preserve 
 
 ## Imagens, vídeos, arquivos e carregamento
 Leia `PADROES-DE-CONTEUDO.md` antes de inserir materiais. Os blocos `video` e `file` estão disponíveis. A página `codigo.html` permite ler e baixar o guia e o código de carregamento. `loading.js` deve vir antes dos outros scripts. O carregamento aparece durante esperas reais; não adicione pausas artificiais.
+
+
+## Descoberta, camadas e ondas
+Os estudos incluem a área de descoberta antes dos blocos de conteúdo. `discovery.js` controla profundidade, faixas e resposta ao mouse/scroll. `discovery.css` define a superfície. `interacoes.json` permite escolher `layers`, `resonance` ou `journey` por ID de projeto e ajustar `amplitude` (0–60), `depth` (0–150) e `frequency` (1–8). O JSON é buscado somente quando a área entra em vista e reutilizado nos outros projetos. As imagens repetidas nas faixas usam a mesma URL; sem imagem, aparece a tipografia da capa. São demonstrações da interface: substitua os materiais provisórios por trabalhos autorizados antes de apresentá-los como resultado.
+
+O campo `version` deve permanecer em 1. Alterar esses parâmetros não exige reescrever navegação, áudio ou conteúdo. Mouse, controles de teclado e toque funcionam sem WebGL. Movimento reduzido mantém uma composição estática e os textos do estudo legíveis.
