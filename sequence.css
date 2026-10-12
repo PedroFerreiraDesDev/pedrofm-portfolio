@@ -1,0 +1,39 @@
+/* Somente o piloto de Experiência. A margem também pertence à composição. */
+#case .detail-inner>.wind-sequence{position:relative;max-width:none;width:100%;height:300svh;margin:15vh 0 20vh;padding:0;isolation:isolate}
+.sequence-stage{position:sticky;top:0;height:100svh;min-height:580px;perspective:1200px;isolation:isolate}
+.sequence-membrane,.sequence-fallback{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.sequence-fallback{top:25%;height:50%;border:1px solid #7856a977;border-radius:49% 51% 64% 36%/38% 68% 32% 62%;transform:rotate(-14deg);background:linear-gradient(120deg,#8e65bd04,#8e65bd14,#27849e04)}
+.has-webgl .sequence-fallback{display:none}
+.sequence-topline{position:absolute;left:7%;right:7%;top:5vh;display:flex;justify-content:space-between;gap:20px;align-items:center;z-index:4;font:11px monospace;letter-spacing:1px}
+#case .sequence-skip{background:white;color:#333;border:1px solid #bbb;border-radius:0;padding:10px 14px;font-size:12px}
+#case .sequence-title{position:absolute;left:9%;top:25%;width:82%;margin:0;font-size:clamp(55px,7.7vw,118px);font-weight:700;line-height:1.04;letter-spacing:-.065em;transform-origin:50% 40%;z-index:3;pointer-events:auto}
+.sequence-title-line{display:block;white-space:nowrap}
+.sequence-letter{display:inline-block;transform-style:preserve-3d}
+.sequence-title em{font-weight:400;font-family:Georgia,serif;font-style:italic;letter-spacing:-.055em}
+#case .sequence-image{position:absolute;right:9%;top:18%;width:43%;height:65%;margin:0;z-index:2;transform-style:preserve-3d;transform-origin:50% 65%}
+#case .sequence-image img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(12px 22px 20px #251b3c20)}
+#case .sequence-image figcaption{font:10px/1.5 monospace;color:#655c70;text-align:right;margin-top:14px}
+#case .sequence-copy{position:absolute;left:7%;top:60%;width:29%;max-width:370px;z-index:3}
+#case .sequence-copy h3{font-size:23px;line-height:1.12;letter-spacing:-.04em;margin:0 0 18px}
+#case .sequence-copy p{font-size:15px;line-height:1.7;margin:0}
+.sequence-bottom{position:absolute;bottom:5vh;left:7%;right:7%;display:flex;align-items:center;gap:22px;z-index:3;font:10px monospace;letter-spacing:1px;color:#62576f}
+.sequence-track{height:1px;flex:1;background:#ddd5e6;overflow:hidden}.sequence-progress{height:100%;background:#68489c;transform-origin:left}
+body.sequence-active #sonic-field{opacity:0!important}
+@media(max-width:760px),(max-height:559px){
+ #case .detail-inner>.wind-sequence{height:auto;margin:90px 0}
+ .sequence-stage{position:relative;height:auto;min-height:0;padding:90px 24px 80px;display:flex;flex-direction:column;gap:48px}
+ .sequence-topline{left:24px;right:24px;top:0;letter-spacing:0;font-size:9px}
+ #case .sequence-title{position:relative;left:auto;top:auto;width:100%;font-size:clamp(34px,8.5vw,64px);transform:none!important}
+ #case .sequence-image{position:relative;right:auto;top:auto;width:100%;height:auto;transform:none!important;opacity:1!important}
+ #case .sequence-image img{height:auto;max-height:65svh}
+ #case .sequence-copy{position:relative;left:auto;top:auto;width:100%;max-width:400px;opacity:1!important;transform:none!important}
+ .sequence-bottom{bottom:0;left:24px;right:24px}.sequence-fallback{top:20%;height:50%}
+}
+@media(prefers-reduced-motion:reduce){
+ #case .detail-inner>.wind-sequence{height:auto}
+ .sequence-stage{position:relative;height:auto;min-height:0;padding:80px 7%;display:grid;gap:40px}
+ #case .sequence-title,#case .sequence-image,#case .sequence-copy{position:relative;inset:auto;width:100%;height:auto;transform:none!important;opacity:1!important}
+ #case .sequence-title{font-size:clamp(34px,6vw,80px)}
+ #case .sequence-image img{height:auto;max-height:70vh}
+ .sequence-membrane,.sequence-fallback,.sequence-bottom{display:none}
+}
