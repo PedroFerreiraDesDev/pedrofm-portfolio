@@ -240,3 +240,21 @@ Teste automatizado verifica exatamente um formulário em cada projeto e no
 Sobre mim. Testes de sucesso, erro de envio, interesses e som continuam válidos.
 Não foi enviado e-mail real nem realizada validação visual em vários dispositivos.
 O link de download e os arquivos publicados devem ser conferidos após o deploy.
+
+## 13/10/2026 — Galeria contextual e revisão da rolagem
+
+Pedido: tornar a exploração interna funcional e avaliar as tecnologias sugeridas.
+
+render-conteudo.js agora deriva miniaturas dos blocos existentes e identifica
+cada capítulo. project-gallery.js controla setas, teclado e o deslocamento ao
+conteúdo escolhido, sem interceptar a roda vertical. experience.css apresenta
+a galeria, mantém as imagens inteiras e reduz a abertura de 270svh para 220svh.
+sequence.js e experience.js usam os limites responsivos do CSS e liberam as
+malhas ao entrar em leitura simplificada.
+
+Não houve migração de framework nem inclusão de biblioteca de animação.
+A análise dos relacionamentos, alternativas e limitações está em
+ANALISE-UX-E-TECNOLOGIAS.md, também disponível no leitor de código.
+
+Testes automatizados cobrem renderização, destinos, contato e recursos da
+experiência. Composição visual, FPS e usabilidade com visitantes seguem pendentes.

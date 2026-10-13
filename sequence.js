@@ -39,7 +39,7 @@
   const paperCanvas=scene.querySelector('.sequence-mesh'),photo=image.querySelector?.('img'),detail=scene.querySelector('.sequence-detail'),next=scene.nextElementSibling?.classList.contains('sequence-followup')?scene.nextElementSibling:null;
   let paper=null,paperAttempted=false,mouseX=Infinity,mouseY=Infinity;
   let renderer=null,attempted=false,frame=0,alive=true,x=0,y=0,tx=0,ty=0,energy=0,phase=0,lastTime=0,progress=0,lastProgress=0;
-  const small=()=>innerWidth<=760||innerHeight<560;
+  const small=()=>innerWidth<=1100||innerHeight<=700;
   function schedule(){if(alive&&!document.hidden&&!frame)frame=requestAnimationFrame(draw);}
   function draw(time){
    frame=0;if(!alive||document.hidden)return;
@@ -55,6 +55,7 @@
    energy=Math.min(1.5,energy+Math.abs(progress-lastProgress)*7);lastProgress=progress;
    const follow=1-Math.pow(.86,dt);x+=(tx-x)*follow;y+=(ty-y)*follow;energy*=Math.pow(.92,dt);phase+=energy*.045*dt;
    const p=pose(progress,small()),reduced=motion.matches||small();
+   if(reduced&&paper){paper.destroy();paper=null;paperAttempted=false;image.classList.remove('mesh-ready');}
    if(reduced){title.style.transform='none';image.style.transform='none';image.style.opacity='1';copy.style.opacity='1';copy.style.transform='none';}
    else{
     title.style.transform=`translate3d(${p.titleX}vw,${p.titleY}vh,0) scale(${p.titleScale}) rotateY(${x*3}deg)`;

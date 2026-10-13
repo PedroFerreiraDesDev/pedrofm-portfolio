@@ -7,7 +7,7 @@
   const events=new AbortController(),signal=events.signal,air=root.querySelector('.flow-atmosphere'),canvas=air.querySelector('canvas');
   const rows=[...root.querySelectorAll('.flow-row, .flow-intro')].map(node=>({node,copy:node.querySelector('.flow-copy'),figure:node.querySelector('.flow-picture'),paper:null,attempted:false,letters:[...node.querySelectorAll('.sequence-letter')]}));
   let alive=true,frame=0,renderer=null,attempted=false,x=0,y=0,tx=0,ty=0,mx=Infinity,my=Infinity,energy=0,phase=0,lastScroll=gallery.scrollTop,lastTime=0;
-  const small=()=>innerWidth<=760||innerHeight<560;
+  const small=()=>innerWidth<=1100||innerHeight<=700;
   function schedule(){if(alive&&!document.hidden&&!frame)frame=requestAnimationFrame(draw);}
   function draw(time){
    frame=0;if(!alive||document.hidden||gallery.hidden)return;
@@ -26,6 +26,7 @@
     const still=motion.matches||small(),sign=row.node.classList.contains('flow-reverse')?-1:1;
     if(row.copy){row.copy.style.transform=still?'none':`translate3d(${-sign*outside*100}px,${outside*48}px,0)`;row.copy.style.opacity=still?'1':String(.45+.55*enter);}
     if(row.figure){
+     if(still&&row.paper){row.paper.destroy();row.paper=null;row.attempted=false;row.figure.classList.remove('mesh-ready');}
      const mesh=row.figure.querySelector('canvas'),photo=row.figure.querySelector('img');
      if(!row.attempted&&!still&&window.PedroPaper){row.attempted=true;row.paper=window.PedroPaper(mesh,photo,ready=>{row.figure.classList.toggle('mesh-ready',ready);schedule();});}
      const box=row.figure.getBoundingClientRect(),hover=mx>box.left&&mx<box.right&&my>box.top&&my<box.bottom;
