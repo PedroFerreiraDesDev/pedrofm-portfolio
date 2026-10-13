@@ -77,14 +77,14 @@ gallery.addEventListener('touchend',e=>{if(e.target.closest('button,a'))return;c
 function showLens(x,y){if(mode!=='gallery')return;lens.hidden=false;lens.style.transform='translate3d('+Math.max(10,Math.min(innerWidth-270,x-130))+'px,'+Math.max(80,Math.min(innerHeight-330,y-120))+'px,0)';$('process')?.setAttribute('aria-expanded','true');}
 
 document.addEventListener('keydown',e=>{
- if(mode==='home')return;
+ if(mode==='home'||e.target.closest('input,textarea,select,[contenteditable="true"]'))return;
  if(e.key==='Escape'){if(mode==='detail')gallery.scrollTo({top:0,behavior:reducedMotion.matches?'auto':'smooth'});else location.hash='';}
  if(mode==='gallery'){
   if(['ArrowRight','ArrowDown'].includes(e.key)){e.preventDefault();move(1);}
   if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();move(-1);}
   if(e.key==='Enter'&&e.target.id==='gallery-stage'){e.preventDefault();openDetails();}
  }else if(e.key==='ArrowUp'&&gallery.scrollTop<=2){e.preventDefault();navigate('galeria');}
- if(e.key==='Tab'){const controls=[...gallery.querySelectorAll('button:not(:disabled),a[href],#gallery-stage')].filter(el=>!el.closest('[hidden]'));const soundButton=document.getElementById('sound-toggle');if(soundButton)controls.push(soundButton);const first=controls[0],last=controls.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+ if(e.key==='Tab'){const controls=[...gallery.querySelectorAll('button:not(:disabled),a[href],input:not([type=hidden]),textarea,select,#gallery-stage')].filter(el=>!el.closest('[hidden]'));const soundButton=document.getElementById('sound-toggle');if(soundButton)controls.push(soundButton);const first=controls[0],last=controls.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
 });
 let mapVisible=true;
 function updateMotion(){grid.classList.toggle('motion-paused',document.hidden||!mapVisible||mode!=='home');}

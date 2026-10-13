@@ -40,3 +40,7 @@ git config --global --add safe.directory C:/Users/Pedro/Documents/Codex/2026-10-
 ```
 
 O Git local já está inicializado na branch main. A configuração global não pôde ser alterada por este ambiente, que não tem permissão de gravação no arquivo da sua conta. O remoto origin está configurado para PedroFerreiraDesDev/pedrofm-portfolio.
+
+## Domínio próprio
+
+O portfólio agora também é publicado em https://pedrofm.com pelo Cloudflare Pages, conectado à branch main. Consulte CONTATO-E-PUBLICACAO.md para ativar o formulário, editar o destinatário e entender o som. O endereço antigo do Sites permanece independente.

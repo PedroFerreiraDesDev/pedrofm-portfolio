@@ -3,6 +3,7 @@
 .flow-atmosphere{position:sticky;top:0;height:100svh;margin-bottom:-100svh;width:100%;pointer-events:none;z-index:0;overflow:hidden}
 .flow-atmosphere canvas{width:100%;height:100%;display:block}
 .flow-content{position:relative;z-index:1}
+.flow-content{min-width:0}
 .flow-intro,.flow-end{width:76%;max-width:1200px;margin:auto;padding:110px 0}
 #case .flow-intro h1{max-width:900px;font-size:clamp(48px,7vw,104px)}
 #case .flow-intro .lead{max-width:680px;font-size:21px;margin-bottom:65px}
@@ -15,6 +16,10 @@
 #case .experience-flow .sequence-title{left:12%;width:76%}
 #case .experience-flow .sequence-image{right:12%;width:40%}
 #case .experience-flow .sequence-copy,#case .experience-flow .sequence-detail{left:12%}
+#case .experience-flow .sequence-copy{top:50%;width:30%;max-width:420px}
+#case .sequence-copy p{padding:0;border:0;color:#51495b;font-size:clamp(13px,1.1vw,16px);line-height:1.6;margin:0 0 12px;overflow-wrap:anywhere}
+#case .sequence-copy h3{font-size:clamp(20px,2vw,28px)}
+#case .sequence-title-line{white-space:normal;overflow-wrap:normal}
 #case .experience-flow .flow-row{position:relative;width:76%;max-width:1200px;min-height:90svh;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(65px,8vw,130px);align-items:center;margin:0 auto;padding:14vh 0;perspective:1200px}
 .flow-copy{position:relative;z-index:2}
 #case .flow-heading{font-size:clamp(36px,4.3vw,66px);line-height:1.05;letter-spacing:-.055em;margin:0 0 32px;max-width:650px}
@@ -30,12 +35,24 @@
 #case .flow-text .flow-heading{font-size:clamp(42px,5.5vw,82px);max-width:850px}
 #case .flow-text .flow-copy p{margin-left:auto;max-width:540px}
 #case .experience-flow .flow-wide{display:block;width:80%;max-width:1350px;padding:12vh 0;min-height:0}
+#case .case-navigation{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);align-items:stretch;gap:24px;border-top:1px solid #dcd6e2;padding:40px 0 100px;height:auto}
+#case .case-nav-back,#case .case-nav-next{box-sizing:border-box;position:relative;min-width:0;min-height:100px;margin:0;padding:26px 30px;border:1px solid #cfc7d8;border-radius:8px;background:#fff;color:#352047;text-align:left;transition:background .2s,border-color .2s;display:flex;align-items:center;gap:16px}
+#case .case-nav-back{font-size:16px;justify-content:flex-start}
+#case .case-nav-next{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 20px}
+.case-nav-label{font-size:12px;letter-spacing:.06em;grid-column:1}
+.case-nav-next strong{font-size:clamp(20px,2.4vw,32px);font-weight:500;overflow-wrap:anywhere;grid-column:1}
+.case-nav-arrow{font-size:30px;grid-column:2;grid-row:1 / 3}
+#case .case-nav-back:hover,#case .case-nav-next:hover{background:#f3eef9;border-color:#7753ad}
+#case .case-nav-back:focus-visible,#case .case-nav-next:focus-visible{outline:3px solid #7753ad;outline-offset:4px}
 #case .flow-wide .flow-picture{max-width:1000px;margin:auto}
 @media(max-width:760px),(max-height:559px){
  .flow-intro,.flow-end{width:auto;margin:0 26px;padding:70px 0}
  #case .flow-intro .lead{font-size:18px}
  #case .experience-flow .wind-sequence{height:auto}
  #case .experience-flow .sequence-title,#case .experience-flow .sequence-copy,#case .experience-flow .sequence-detail{left:auto;width:100%}
+ #case .experience-flow .sequence-copy{top:auto;max-width:none}
+ #case .sequence-copy p{font-size:16px}
+ #case .case-navigation{grid-template-columns:1fr;gap:16px;padding:30px 0 100px}
  #case .experience-flow .sequence-image{right:auto;width:100%}
  .experience-flow .sequence-topline{left:26px;right:26px}
  #case .experience-flow .flow-row,#case .experience-flow .flow-wide,#case .experience-flow .flow-text{display:flex;flex-direction:column;align-items:stretch;width:auto;margin:0 26px;min-height:0;padding:80px 0;gap:55px}
@@ -44,7 +61,18 @@
  #case .flow-picture.mesh-ready .sequence-paper>img{opacity:1}
  .flow-picture .sequence-mesh{display:none}
 }
+/* Telas intermediárias: leitura no fluxo natural, sem sobreposição. */
+@media(min-width:761px) and (max-width:1100px), (min-width:761px) and (max-height:700px){
+ #case .experience-flow .wind-sequence{height:auto}
+ #case .experience-flow .sequence-stage{position:relative;height:auto;min-height:0;display:grid;gap:40px;padding:100px 12% 80px}
+ #case .experience-flow .sequence-title,#case .experience-flow .sequence-image,#case .experience-flow .sequence-copy{position:relative;inset:auto;width:100%;height:auto;max-width:none;transform:none!important;opacity:1!important}
+ #case .experience-flow .sequence-title{font-size:clamp(40px,6vw,72px)}
+ #case .experience-flow .sequence-image img{height:auto;max-height:70svh;opacity:1!important}
+ #case .experience-flow .sequence-image .sequence-mesh{display:none}
+ #case .sequence-copy p{font-size:16px;max-width:640px}
+}
 @media(prefers-reduced-motion:reduce){
+ #case .experience-flow .sequence-copy{inset:auto;width:100%;max-width:640px}
  .flow-atmosphere{display:none}
  #case .experience-flow .wind-sequence{height:auto}
  #case .flow-picture.mesh-ready .sequence-paper>img{opacity:1}

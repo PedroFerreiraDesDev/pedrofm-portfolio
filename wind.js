@@ -6,7 +6,7 @@
  const cursor=document.createElement('div');cursor.id='signal-cursor';cursor.setAttribute('aria-hidden','true');cursor.innerHTML='<span class="signal-ring"></span><span id="signal-label"></span>';document.body.append(cursor);
  const dock=document.createElement('div');dock.className='sound-dock';dock.innerHTML='<button id="sound-toggle" aria-pressed="false" aria-label="Ativar vento sonoro"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><span id="sound-label" aria-live="polite">Som: desligado</span></button>';document.body.append(dock);
  const toggle=document.getElementById('sound-toggle'),label=document.getElementById('signal-label'),motion=matchMedia('(prefers-reduced-motion: reduce)');
- let w=innerWidth,h=innerHeight,x=w/2,y=h/2,px=x,py=y,energy=0,frame=0,last=0,hover=null,pointer=false,modulation=0,sound=null,soundOn=false,busy=false,context=null;
+ let w=innerWidth,h=innerHeight,x=w/2,y=h/2,px=x,py=y,energy=0,frame=0,last=0,hover=null,pointer=false,modulation=0,sound=null;
  function positionField(){
   const host=canvas.parentElement;
   if(host?.id==='track'){
@@ -71,23 +71,10 @@
  document.addEventListener('scroll',()=>wake(.06),{passive:true,capture:true});
  document.addEventListener('pointerdown',e=>{if(e.target.closest?.('.sound-dock'))return;if(actionFor(e.target))wake(.5);},{passive:true});
  document.addEventListener('touchmove',e=>{if(e.touches[0]){x=e.touches[0].clientX;y=e.touches[0].clientY;wake(.08);}},{passive:true});
- toggle.addEventListener('click',async e=>{
-  e.stopPropagation();if(busy)return;busy=true;toggle.setAttribute('aria-busy','true');document.getElementById('sound-label').textContent='Sintonizando áudio…';
-  try{
-   if(!sound){
-    const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)throw Error('unsupported');
-    context=new Audio();await context.resume();
-    const module=await (window.PedroLoading?window.PedroLoading.run(()=>import('./audio.js'),{label:'Sintonizando áudio…'}):import('./audio.js'));sound=module.createSonicWind(context);
-   }
-   soundOn=!soundOn;await sound.setEnabled(soundOn);sound.setScene(location.hash.startsWith('#projeto/'));toggle.setAttribute('aria-pressed',String(soundOn));toggle.setAttribute('aria-label',soundOn?'Silenciar vento sonoro':'Ativar vento sonoro');document.getElementById('sound-label').textContent=soundOn?'Som: ligado':'Som: desligado';wake(.3);
-  }catch{soundOn=false;if(context&&!sound)await context.close().catch(()=>{});toggle.setAttribute('aria-pressed','false');document.getElementById('sound-label').textContent='Som indisponivel';toggle.setAttribute('aria-label','Tentar ativar o som novamente');}
-  finally{busy=false;toggle.setAttribute('aria-busy','false');}
- });
- let pagePresent=!document.hidden&&(document.hasFocus?.()??true);
- function syncPresence(present){pagePresent=present&&!document.hidden;if(!pagePresent){if(frame)cancelAnimationFrame(frame);frame=0;ctx?.clearRect(0,0,w,h);}else wake(.08);sound?.setScene(location.hash.startsWith('#projeto/'));sound?.setEnabled(soundOn&&pagePresent).catch(()=>{});const status=document.getElementById('sound-label');if(status)status.textContent=soundOn?(pagePresent?'Som: ligado':'Som: pausado'):'Som: desligado';}
- document.addEventListener('visibilitychange',()=>syncPresence(!document.hidden&&(document.hasFocus?.()??true)));window.addEventListener('blur',()=>syncPresence(false));window.addEventListener('focus',()=>syncPresence(true));window.addEventListener('pagehide',()=>syncPresence(false));window.addEventListener('pageshow',()=>syncPresence(!document.hidden));
+ sound=window.createPedroSoundControls(toggle);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(frame)cancelAnimationFrame(frame);frame=0;ctx?.clearRect(0,0,w,h);}else wake(.08);});
  window.addEventListener('hashchange',()=>{placeField();setHover(null);sound?.setScene(location.hash.startsWith('#projeto/'));wake(.25);});
  document.addEventListener('click',e=>{if(e.target.closest?.('.sound-dock')||!actionFor(e.target))return;sound?.playClick(location.hash.startsWith('#projeto/')?'enter':'tap');});
- window.addEventListener('pedro:loading',()=>{if(soundOn&&pagePresent)sound?.playClick('tap');});
+ window.addEventListener('pedro:loading',()=>{if(sound?.isActive())sound?.playClick('tap');});
  window.addEventListener('resize',resize,{passive:true});placeField();resize();
 })();
