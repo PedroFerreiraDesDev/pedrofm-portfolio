@@ -186,3 +186,57 @@ Referência: https://developers.cloudflare.com/cache/how-to/edge-browser-cache-t
 
 Após o ajuste, confirmar novamente o cabeçalho de /contact.js. O resultado esperado
 é public, no-cache, max-age=0, must-revalidate, como já observado no Pages.
+
+## 13/10/2026 — Contato nas capas e no Sobre mim; download do histórico
+
+### Pedido
+
+Disponibilizar o histórico por um endereço que funcione fora do computador,
+incluir o formulário no perfil e oferecer contato antes de entrar nos estudos.
+
+### O que mudou e como funciona
+
+- render-conteudo.js reutiliza projectContact também no Sobre mim. Há exatamente
+  um formulário por página e o campo de origem identifica o projeto ou perfil.
+  O perfil ganhou ainda um atalho de contato logo após sua apresentação.
+- index.html ganhou Entrar em contato na barra superior das capas.
+- app.js atualiza o endereço desse atalho ao trocar de capa. A rota
+  #projeto/ID/contato abre o conteúdo e calcula o deslocamento até o formulário,
+  usando a posição do elemento em relação ao contêiner que realmente rola.
+  requestAnimationFrame espera a montagem antes da medição. A seção recebe foco
+  sem outro salto, permitindo continuar pelo teclado. Movimento reduzido troca
+  a rolagem suave por deslocamento imediato. Conteúdo já aberto é reutilizado,
+  preservando campos preenchidos ao usar o atalho dentro do próprio perfil.
+- contact.css dá ao atalho altura mínima de 48px, borda, contraste e foco.
+  No perfil, o formulário ocupa a largura disponível e empilha no celular.
+- _headers acrescenta Content-Disposition: attachment ao histórico.
+  O link público /HISTORICO-DE-MUDANCAS.md passa a solicitar download, enquanto
+  codigo.html ainda permite ler o documento via fetch.
+- O sufixo dos scripts/estilos foi atualizado para evitar cópias antigas enquanto
+  a configuração de cache do domínio ainda não tiver sido confirmada.
+
+### Decisões de UX
+
+Reconhecimento em vez de memorização: o rótulo Entrar em contato é explícito.
+A pessoa não precisa descobrir que o formulário só aparece após uma longa leitura.
+
+Lei de Fitts: uma área de clique maior reduz a precisão necessária para atingir
+o controle. Os 48px são uma decisão de implementação, não uma medida prescrita
+pela lei. O alvo fica estável, sem flutuar durante o clique.
+
+Consistência: mesma posição e nome ao mudar de projeto. O formulário permanece
+ligado à capa escolhida, evitando uma mudança inesperada para outra página.
+
+Esses princípios orientam o desenho; não demonstram aumento de conversão.
+Uma avaliação visual e testes com visitantes ainda são necessários.
+
+Referências:
+- https://www.nngroup.com/articles/recognition-and-recall/
+- https://www.nngroup.com/articles/fitts-law/
+
+### Verificação
+
+Teste automatizado verifica exatamente um formulário em cada projeto e no
+Sobre mim. Testes de sucesso, erro de envio, interesses e som continuam válidos.
+Não foi enviado e-mail real nem realizada validação visual em vários dispositivos.
+O link de download e os arquivos publicados devem ser conferidos após o deploy.

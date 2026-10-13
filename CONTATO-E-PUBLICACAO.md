@@ -7,7 +7,7 @@ Sites possui publicação separada e não acompanha automaticamente o GitHub.
 
 ## Formulário
 
-O formulário aparece apenas no final dos sete estudos, antes da navegação final.
+O formulário aparece no final dos sete estudos e também no Sobre mim, antes da navegação final.
 `projectContact()` em `render-conteudo.js` define os campos e o destinatário
 `oi@pedrofm.com`. `contact.css` controla o layout e `contact.js` controla o envio AJAX e evita submissões
 duplicadas. Nenhuma senha ou chave fica no navegador.
@@ -77,3 +77,10 @@ O identificador público enviado pelo FormSubmit substitui o destinatário nos
 endpoints, tanto no POST alternativo quanto no AJAX. Não é uma senha nem uma
 chave de administração. O mailto permanece visível como contato alternativo.
 Clique em Activate Form no e-mail recebido e faça outro teste de entrega.
+
+## Atalhos de contato
+
+Nas capas, Entrar em contato abre #projeto/ID/contato. O roteador monta o
+conteúdo e desloca o contêiner da galeria até o formulário correspondente.
+O Sobre mim usa a mesma estrutura e possui um atalho no início do perfil.
+A tela inicial continua sem formulário.

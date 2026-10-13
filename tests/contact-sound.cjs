@@ -4,7 +4,8 @@ const r={};vm.createContext(r);vm.runInContext(read('conteudo.js')+'\n'+read('re
 const projects=vm.runInContext('portfolioData.projects',r);
 for(const p of projects){
  const html=r.renderProjectContent(p);
- assert.equal(html.includes('class="contact-form"'),!p.about);
+ assert.equal((html.match(/class="contact-form"/g)||[]).length,1);
+ assert.ok(html.includes('class="project-contact" tabindex="-1"'));
  if(p.about)continue;
  assert.ok(html.includes('action="https://formsubmit.co/62a12ed62e8f7cb7f09c738e9239aa70" method="POST"'));
  assert.ok(html.includes('name="message" required'));
