@@ -258,3 +258,29 @@ ANALISE-UX-E-TECNOLOGIAS.md, também disponível no leitor de código.
 
 Testes automatizados cobrem renderização, destinos, contato e recursos da
 experiência. Composição visual, FPS e usabilidade com visitantes seguem pendentes.
+
+## 13/10/2026 — Hierarquia dos controles nas capas
+
+Problema: navegação, contato e leitura tinham aparência e destaque semelhantes.
+
+hierarchy.css, carregado após os estilos existentes, separa três níveis:
+Saiba mais com fundo roxo #563393 e texto branco; contato com contorno e fundo
+claro; Ver todos como texto sublinhado. O título principal e a imagem continuam
+dominantes. Categoria, selo provisório e contador têm menor escala tipográfica.
+
+Anterior/próximo viraram chevrons laterais com nomes acessíveis, área de 48x56px
+e foco de teclado. O controle de som ficou visualmente menor, preservando sua
+área de toque de 44px e o estado textual.
+
+hierarchy.js mostra uma dica junto ao cursor sobre a capa ou título. A dica é
+decorativa, não intercepta cliques e não substitui Saiba mais em dispositivos
+de toque. A instrução dupla no rodapé foi removida. Uma indicação vertical
+lateral apresenta uma breve onda a cada mudança de capa, respeitando movimento
+reduzido. A dica é ocultada ao rolar, sair da capa ou trocar de rota.
+
+Decisão: diferenciação por preenchimento, escala e posição, sem depender
+exclusivamente de cores. Não foram inseridas fotos novas: as capas existentes
+permanecem provisórias até o envio de imagens autorizadas.
+
+Verificação: sintaxe JavaScript e estrutura dos controles; confirmação dos
+arquivos após publicação. Não houve validação visual em navegador nesta execução.
