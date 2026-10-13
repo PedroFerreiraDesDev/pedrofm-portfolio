@@ -34,7 +34,7 @@
   feedback('sending','Sua ideia está em movimento.','Estamos enviando sua solicitação.');
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
   try{
-   const response=await fetch('https://formsubmit.co/ajax/oi@pedrofm.com',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload),signal:controller.signal});
+   const response=await fetch('https://formsubmit.co/ajax/62a12ed62e8f7cb7f09c738e9239aa70',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload),signal:controller.signal});
    const result=await response.json();
    if(!response.ok||!(result.success===true||result.success==='true'))throw new Error('not-accepted');
    status.textContent='Solicitação enviada. Obrigado por compartilhar sua ideia!';

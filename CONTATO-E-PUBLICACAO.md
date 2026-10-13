@@ -12,7 +12,7 @@ O formulário aparece apenas no final dos sete estudos, antes da navegação fin
 `oi@pedrofm.com`. `contact.css` controla o layout e `contact.js` controla o envio AJAX e evita submissões
 duplicadas. Nenhuma senha ou chave fica no navegador.
 
-O envio usa fetch com JSON para https://formsubmit.co/ajax/oi@pedrofm.com.
+O envio usa fetch com JSON para https://formsubmit.co/ajax/62a12ed62e8f7cb7f09c738e9239aa70.
 O visitante permanece no projeto. Um dialog nativo exibe ondas durante o envio,
 confirma o aceite do serviço ou informa falha sem apagar os campos. Timeout de
 20 segundos, bloqueio de envio duplicado e campo honeypot ajudam no fluxo.
@@ -58,3 +58,22 @@ projeto e empilhamento no celular.
 
 Validação local: `node tests/contact-sound.cjs`. Ainda é necessário conferir a
 composição visual em navegadores reais e concluir a ativação/entrega do e-mail.
+
+## Atualizações e cache
+
+O arquivo _headers exige revalidação de todos os arquivos estáticos antes de
+reutilizá-los. Não desliga o armazenamento: permite aproveitar uma cópia válida
+quando o servidor confirma que ela não mudou. O sufixo ?v=20261013-cache1 no
+HTML evita reutilizar scripts e estilos armazenados antes desta configuração.
+Essa migração é pontual; a revalidação controla as atualizações seguintes.
+Após publicação bem-sucedida, recarregue a página normalmente. Uma aba já aberta
+não troca seu JavaScript sozinha; não há recarga automática que apague formulários.
+
+Se o domínio voltar a entregar max-age=14400, revise regras de cache da zona
+Cloudflare. Não use Cache Everything sobre o Pages nem regras que ignorem os
+cabeçalhos da origem. O histórico detalhado está em HISTORICO-DE-MUDANCAS.md.
+
+O identificador público enviado pelo FormSubmit substitui o destinatário nos
+endpoints, tanto no POST alternativo quanto no AJAX. Não é uma senha nem uma
+chave de administração. O mailto permanece visível como contato alternativo.
+Clique em Activate Form no e-mail recebido e faça outro teste de entrega.

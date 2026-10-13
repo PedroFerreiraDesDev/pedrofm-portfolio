@@ -6,7 +6,7 @@ for(const p of projects){
  const html=r.renderProjectContent(p);
  assert.equal(html.includes('class="contact-form"'),!p.about);
  if(p.about)continue;
- assert.ok(html.includes('action="https://formsubmit.co/oi@pedrofm.com" method="POST"'));
+ assert.ok(html.includes('action="https://formsubmit.co/62a12ed62e8f7cb7f09c738e9239aa70" method="POST"'));
  assert.ok(html.includes('name="message" required'));
  assert.ok(!html.includes('onsubmit=')&&!html.includes('type="submit" disabled'));
  assert.ok(!html.includes('class="sequence-detail"'));
