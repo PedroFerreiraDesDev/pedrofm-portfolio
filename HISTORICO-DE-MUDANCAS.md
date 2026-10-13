@@ -170,3 +170,19 @@ local, envio ao GitHub, publicação na Cloudflare e conferência do domínio.
 - https://developers.cloudflare.com/pages/configuration/debugging-pages/
 - https://formsubmit.co/
 - https://formsubmit.co/ajax-documentation
+
+### Conferência após a publicação aa1d664
+
+Os testes automatizados passaram. A leitura HTTP confirmou o identificador novo
+no código publicado e a regra no Pages. Porém o JavaScript no domínio personalizado
+continuou com max-age=14400; portanto a correção de cache ainda depende do painel.
+
+No painel Cloudflare, selecionar pedrofm.com → Caching → Configuration →
+Browser Cache TTL → Respect Existing Headers. Se houver Cache Rule específica
+sobrescrevendo o TTL do navegador, configurá-la para respeitar a origem também.
+Não foi realizada alteração no painel por falta de acesso autenticado.
+
+Referência: https://developers.cloudflare.com/cache/how-to/edge-browser-cache-ttl/set-browser-ttl/
+
+Após o ajuste, confirmar novamente o cabeçalho de /contact.js. O resultado esperado
+é public, no-cache, max-age=0, must-revalidate, como já observado no Pages.
