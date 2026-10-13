@@ -15,3 +15,36 @@
 @media(max-width:760px){#case .project-contact{width:auto;margin:40px 26px 0;grid-template-columns:1fr;padding:56px 0;gap:32px}}
 
 #case .project-contact .contact-privacy{font-size:13px;margin:0;line-height:1.6} .contact-privacy a{text-decoration:underline;text-underline-offset:3px} #case .contact-submit:hover:not(:disabled){background:#563393} #case .contact-submit:focus-visible{outline:3px solid #7753ad;outline-offset:4px}
+/* Opções com ondas: movimento apenas na superfície, campos estáveis. */
+.contact-interests{border:0;padding:0;margin:0;min-width:0}
+.contact-interests legend{font-size:20px;font-weight:600;letter-spacing:-.02em}
+#case .project-contact .contact-hint{font-size:13px;margin:8px 0 16px}
+.contact-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.contact-choice{position:relative;cursor:pointer;min-width:0}
+#case .contact-choice input{position:absolute;opacity:0;width:1px;height:1px}
+.contact-choice span{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;gap:10px;min-height:62px;padding:12px 14px;box-sizing:border-box;border:1px solid #c6bccf;border-radius:14px;font-size:14px;line-height:1.4;color:#352047;background:#faf8fc;transition:transform .35s ease,background .35s,border-color .35s}
+.contact-choice span:before{content:'+';flex:0 0 18px;font-size:20px}
+.contact-choice span:after{content:'';position:absolute;z-index:-1;inset:-40%;border:1px solid #a78bc5;border-radius:45%;opacity:0;transform:scale(.2);transition:transform .65s ease,opacity .65s}
+.contact-choice:hover span{transform:translateY(-3px);border-color:#7753ad}
+.contact-choice:hover span:after{transform:scale(1);opacity:.5}
+.contact-choice input:checked+span{background:#ece3f6;border-color:#7753ad;color:#352047}
+.contact-choice input:checked+span:before{content:'✓'}
+.contact-choice input:focus-visible+span{outline:3px solid #7753ad;outline-offset:3px}
+.contact-honey{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important}
+.contact-feedback{box-sizing:border-box;width:min(480px,calc(100% - 40px));max-height:85dvh;overflow:auto;border:1px solid #d5c7e3;border-radius:24px;padding:36px;color:#352047;background:#fcfaff;box-shadow:0 20px 100px #26133730;text-align:center}
+.contact-feedback[open]{animation:contact-arrive .45s ease both}
+.contact-feedback::backdrop{background:#281b3a65;backdrop-filter:blur(6px)}
+.contact-feedback h2{font:600 clamp(24px,5vw,34px)/1.12 sans-serif;letter-spacing:-.035em}
+.contact-feedback p{font:16px/1.65 sans-serif;color:#62556e}
+.contact-feedback button{border:0;border-radius:30px;padding:14px 22px;background:#352047;color:#fff;font:inherit;cursor:pointer;min-height:48px}
+.contact-feedback button:focus-visible{outline:3px solid #9773bc;outline-offset:4px}
+.contact-wave{position:relative;width:120px;height:90px;margin:0 auto 24px}
+.contact-wave i{position:absolute;inset:18px 0;border:1.5px solid #8754bd;border-radius:47% 53% 65% 35%;animation:contact-wave 2.4s ease-in-out infinite}
+.contact-wave i:nth-child(2){animation-delay:-.8s;inset:10px 12px;border-color:#b099c7}
+.contact-wave i:nth-child(3){animation-delay:-1.6s;inset:0 24px}
+.contact-feedback[data-state=success] .contact-wave i{animation-iteration-count:1}
+.contact-feedback[data-state=error] .contact-wave i{animation-play-state:paused;border-color:#9b5959}
+@keyframes contact-wave{0%,100%{transform:scale(.75) rotate(-12deg);opacity:.4}50%{transform:scale(1.08) rotate(16deg);opacity:1}}
+@keyframes contact-arrive{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+@media(max-width:380px){.contact-choices{grid-template-columns:1fr}.contact-feedback{padding:24px}}
+@media(prefers-reduced-motion:reduce){.contact-feedback[open],.contact-wave i{animation:none}.contact-choice span,.contact-choice span:after{transition:none}.contact-choice:hover span{transform:none}}

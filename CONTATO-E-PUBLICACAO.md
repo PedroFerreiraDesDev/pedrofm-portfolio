@@ -9,13 +9,20 @@ Sites possui publicação separada e não acompanha automaticamente o GitHub.
 
 O formulário aparece apenas no final dos sete estudos, antes da navegação final.
 `projectContact()` em `render-conteudo.js` define os campos e o destinatário
-`oi@pedrofm.com`. `contact.css` controla o layout e `contact.js` evita submissões
-duplicadas durante o encaminhamento. Nenhuma senha ou chave fica no navegador.
+`oi@pedrofm.com`. `contact.css` controla o layout e `contact.js` controla o envio AJAX e evita submissões
+duplicadas. Nenhuma senha ou chave fica no navegador.
 
-O POST vai ao FormSubmit; esse serviço processa os dados e a verificação antispam.
-O navegador sai temporariamente do portfólio para concluir a verificação e retorna
-a `contato-enviado.html`. O encaminhamento do e-mail para o Gmail continua sendo
-administrado pela configuração que Pedro criou no domínio.
+O envio usa fetch com JSON para https://formsubmit.co/ajax/oi@pedrofm.com.
+O visitante permanece no projeto. Um dialog nativo exibe ondas durante o envio,
+confirma o aceite do serviço ou informa falha sem apagar os campos. Timeout de
+20 segundos, bloqueio de envio duplicado e campo honeypot ajudam no fluxo.
+O CAPTCHA está desativado neste fluxo AJAX; honeypot não elimina todo spam.
+O aceite da API não comprova entrega na caixa postal: ativação e teste continuam
+necessários. O encaminhamento ao Gmail permanece na configuração do domínio.
+
+As oito opções de interesse são checkboxes nativos, em duas colunas, com
+seleção múltipla obrigatória. Os interesses seguem juntos no e-mail. Animações
+respeitam prefers-reduced-motion. Não há bibliotecas novas.
 
 ### Ativação necessária pelo titular
 
