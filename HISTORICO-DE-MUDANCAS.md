@@ -284,3 +284,35 @@ permanecem provisórias até o envio de imagens autorizadas.
 
 Verificação: sintaxe JavaScript e estrutura dos controles; confirmação dos
 arquivos após publicação. Não houve validação visual em navegador nesta execução.
+
+## 13/10/2026 — Galeria flutuante conduzida pela página
+
+Correção da interpretação anterior: as miniaturas com setas foram substituídas
+por um percurso horizontal ligado ao scroll vertical. Não existe repetição infinita.
+
+- A seção usa uma área sticky cuja duração depende da largura real das peças.
+- project-gallery.js mede a extensão lateral e converte a posição da página
+  em um progresso entre zero e um. Rolar para cima percorre o mesmo caminho ao
+  contrário. Não há temporizador de avanço, captura de wheel nem snap obrigatório.
+- As peças alternam largura e deslocamento vertical; crescem de 82% a 100% de
+  sua dimensão-base quando passam pelo centro e oscilam com o progresso.
+- Dimensões e proporções originais são preservadas com object-fit: contain.
+  Os materiais provisórios atuais têm proporções semelhantes; a estrutura aceita
+  imagens verticais, quadradas e horizontais quando forem cadastradas.
+- Barra e setas removidas. Espaços amplos limitam as peças visíveis por vez.
+- Ao fim, uma mensagem introduz a continuação vertical. “Continuar leitura”
+  permite pular a sequência sem precisar percorrer todas as imagens.
+- Clique na imagem abre uma ampliação limitada a 1,4 vezes o tamanho exibido
+  e à área disponível da tela, sem ocupar a tela toda. Fechar, Escape e clique
+  externo permitem retornar. Também vale para imagens maiores no corpo do estudo.
+- O trackpad usa rolagem vertical nativa com dois dedos, preservando inércia.
+  Gestos exclusivamente horizontais não são convertidos em rolagem vertical.
+- Movimento reduzido ou tela muito baixa: composição estática com todas as peças,
+  sem fixação de scroll. Teclado traz cada peça focada para a região visível.
+- RAF só é agendado por eventos; listeners e observador são removidos na troca
+  de rota. Nenhum WebGL adicional foi criado para a galeria.
+
+Validação: sintaxe, renderização dos sete estudos, formatos variados e testes
+existentes de experiência, sequência e contato. A sensibilidade real de trackpad,
+toque, zoom e composição visual ainda precisa de validação em dispositivos.
+Esta entrada substitui o comportamento da galeria descrito na entrada anterior.

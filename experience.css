@@ -79,23 +79,48 @@
  .flow-picture .sequence-mesh{display:none}
 }
 
-/* Galeria contextual: miniaturas preservam a peça inteira e navegam ao conteúdo. */
+
+/* Percurso lateral finito sobre a rolagem vertical nativa. */
 #case .project-chapter{position:relative;min-width:0}
 #case .project-chapter:focus{outline:none}
-#case .project-chapter:focus-visible{outline:2px solid #7753ad;outline-offset:-4px}
-#case .experience-flow .project-visual-index{width:76%;max-width:1200px;margin:0 auto;padding:64px 0 80px;border-top:1px solid #dcd6e2;border-bottom:1px solid #dcd6e2}
-.project-gallery-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px}
-#case .project-gallery-heading h2{font-size:clamp(32px,4vw,54px);margin:8px 0 16px;letter-spacing:-.045em}
-#case .project-gallery-heading p{max-width:500px;color:#51495b}
-.project-gallery-controls{display:flex;gap:12px}
-#gallery .project-gallery-controls button{width:48px;min-height:48px;padding:8px;border:1px solid #bbaeca;border-radius:50%;background:#fff;color:#352047;font-size:22px}
-.project-gallery-rail{display:flex;gap:24px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scroll-padding:2px;padding:12px 4px 22px;touch-action:pan-x pan-y;scrollbar-width:thin;scrollbar-color:#a88abb #f3eef8}
-#gallery .project-gallery-card{flex:0 0 clamp(230px,29vw,350px);min-width:0;display:block;padding:0;text-align:left;border:0;border-radius:0;background:transparent;color:#352047;scroll-snap-align:start}
-.project-gallery-card img{width:100%;height:300px;object-fit:contain;background:#f3f0f6;display:block;border-radius:12px;transition:transform .4s ease,background .4s}
-.project-gallery-card:hover img{transform:translateY(-6px) rotate(-1deg);background:#e9e0f2}
-.project-gallery-card span{display:grid;gap:12px;padding:20px 4px}
-.project-gallery-card small{font:10px/1.5 monospace;letter-spacing:.08em;color:#685878}
-.project-gallery-card strong{font-size:20px;font-weight:500;line-height:1.25}
-#gallery .project-gallery-card:focus-visible,#gallery .project-gallery-controls button:focus-visible{outline:3px solid #7753ad;outline-offset:2px}
-@media(max-width:760px){#case .experience-flow .project-visual-index{width:auto;margin:0 26px;padding:40px 0}.project-gallery-heading{align-items:flex-start;flex-direction:column}.project-gallery-card img{height:240px}#gallery .project-gallery-card{flex-basis:78%}}
-@media(prefers-reduced-motion:reduce){.project-gallery-card img{transition:none}.project-gallery-card:hover img{transform:none}}
+#case .experience-flow .project-visual-index{position:relative;width:100%;max-width:none;margin:0;padding:0;height:var(--gallery-height,auto)}
+.project-gallery-stage{position:sticky;top:0;height:100svh;overflow:hidden}
+.project-gallery-heading{position:absolute;top:5%;left:8%;right:8%;display:flex;align-items:center;justify-content:space-between;gap:20px;z-index:3}
+#case .project-gallery-heading p{font-size:11px;margin:0;color:#65576d}
+.gallery-skip{font-size:12px;text-underline-offset:4px;text-decoration:underline;min-height:44px;display:inline-flex;align-items:center}
+.project-gallery-window{position:absolute;inset:17% 0 12%;overflow:hidden}
+.project-gallery-rail{display:flex;align-items:center;gap:clamp(90px,18vw,320px);height:100%;width:max-content;padding:0 24vw;will-change:transform}
+#gallery .project-gallery-card{position:relative;flex:0 0 auto;width:clamp(210px,var(--piece-width),640px);padding:0;border:0;background:transparent;color:#352047;text-align:left;transform-origin:center;cursor:zoom-in}
+#gallery .project-gallery-card:hover{background:transparent;color:#352047;outline:none}
+.project-gallery-card img{display:block;width:100%;height:auto;max-height:44svh;object-fit:contain;filter:drop-shadow(0 18px 18px #33214a18)}
+.project-gallery-card span{display:grid;gap:9px;padding:20px 0 0}
+.project-gallery-card small{font:10px monospace;color:#75677f}
+.project-gallery-card strong{font-size:clamp(15px,1.5vw,21px);font-weight:500;line-height:1.3}
+#case .project-gallery-ending{position:absolute;bottom:5%;left:8%;right:8%;margin:0;font-size:13px;color:#65576d;opacity:var(--end-opacity,0);transform:translateY(calc((1 - var(--end-opacity,0)) * 12px));pointer-events:none}
+.project-gallery-ending span{display:inline-block;margin-left:16px}
+#gallery .project-gallery-card:focus-visible,.gallery-skip:focus-visible{outline:3px solid #7753ad;outline-offset:6px}
+.project-image-zoom{box-sizing:content-box;max-width:86vw;max-height:84svh;border:0;padding:18px;border-radius:10px;background:#fff;box-shadow:0 20px 80px #24142f38;color:#352047}
+.project-image-zoom::backdrop{background:#20182865;backdrop-filter:blur(5px)}
+.project-image-zoom img{display:block;width:auto;height:auto;max-width:100%;max-height:70svh;object-fit:contain;margin:auto}
+.project-image-zoom button{display:block;margin:0 0 12px auto;padding:10px 14px;min-height:44px;background:#fff;color:#352047;border:1px solid #bfb2cc;border-radius:24px}
+.project-image-zoom[open]{animation:piece-zoom .25s ease-out}
+[data-project-zoom]{cursor:zoom-in}
+@keyframes piece-zoom{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@media(max-width:760px){
+ .project-gallery-heading{left:7%;right:7%;flex-wrap:wrap;gap:6px 16px}
+ .project-gallery-heading .eyebrow{width:100%}
+ #gallery .project-gallery-card{width:70vw}
+ .project-gallery-rail{padding:0 15vw;gap:28vw}
+ .project-gallery-card img{max-height:42svh}
+}
+@media(prefers-reduced-motion:reduce),(max-height:500px){
+ #case .experience-flow .project-visual-index{height:auto!important;padding:45px 7%}
+ .project-gallery-stage{position:relative;height:auto;overflow:visible}
+ .project-gallery-heading{position:static;flex-wrap:wrap;margin-bottom:30px}
+ .project-gallery-window{position:relative;inset:auto;overflow:visible}
+ .project-gallery-rail{width:auto;height:auto;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:60px;transform:none!important;will-change:auto}
+ #gallery .project-gallery-card{width:100%;transform:none!important}
+ .project-gallery-card img{max-height:60svh}
+ #case .project-gallery-ending{position:static;margin-top:30px;opacity:1;transform:none}
+ .project-image-zoom[open]{animation:none}
+}
