@@ -316,3 +316,23 @@ Validação: sintaxe, renderização dos sete estudos, formatos variados e teste
 existentes de experiência, sequência e contato. A sensibilidade real de trackpad,
 toque, zoom e composição visual ainda precisa de validação em dispositivos.
 Esta entrada substitui o comportamento da galeria descrito na entrada anterior.
+
+## 14/10/2026 — Entrada das capas e assinatura da marca
+
+- Problema: a grade mudava de opacidade zero para um no primeiro movimento. Deslocamentos fixos podiam deixar cards dentro da tela antes de entrar.
+- zoom.js agora calcula a distância de entrada pela posição e dimensão real de cada card. Cada um parte de uma das bordas, com margem externa, e chega ao destino por uma curva progressiva ligada à rolagem. A opacidade cresce junto; a expansão posterior da primeira capa continua funcionando.
+- brand-intro.js e brand-intro.css mostram a assinatura Pedro.fm com uma onda desenhada em SVG por 300 ms antes da home. Não aparecem nos links diretos de projetos. A abertura não captura cliques e é omitida com movimento reduzido.
+- loading.js permanece responsável pela espera real por arquivos. A assinatura não informa progresso nem promete que tudo foi carregado em 300 ms.
+- index.html inclui os novos arquivos e atualiza suas versões. codigo.html permite ler e baixar os arquivos da abertura.
+
+### Psicologia e UX: justificativas e limites
+
+O Limiar de Doherty orienta respostas rápidas (referência de 400 ms); não exige uma tela de espera de 280–300 ms. Aqui 300 ms é uma escolha de direção de movimento. A abertura é breve para não transformar a identidade em obstáculo. Referência: https://lawsofux.com/doherty-threshold/
+
+Os limites de resposta de Nielsen distinguem reação percebida como imediata, continuidade de pensamento e espera prolongada. Por isso, a resposta ao scroll começa no próximo frame; não aguarda o fim de um temporizador. A indicação de carregamento real é independente da assinatura. Referência: https://www.nngroup.com/articles/response-times-3-important-limits/
+
+A entrada espacial mantém uma trajetória entre origem e destino, em vez de fazer objetos aparecerem instantaneamente. Esta é uma decisão de design para dar orientação; não é prova de melhora de conversão ou resultado de teste com usuários.
+
+### Verificação
+
+Verificação de sintaxe, testes de comportamento da abertura e regressões existentes. Não houve inspeção visual em navegador nesta atualização: suavidade percebida e composição em dispositivos reais ainda precisam de avaliação visual.
