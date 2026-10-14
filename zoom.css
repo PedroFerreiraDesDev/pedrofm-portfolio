@@ -12,3 +12,6 @@ body.map-mode{height:100dvh;overflow:hidden;overscroll-behavior:none}
 @media(max-width:700px){.project-map .card:nth-child(1){left:5%;top:13%}.project-map .card:nth-child(2){left:54%;top:18%}.project-map .card:nth-child(3){left:6%;top:57%}.project-map .card:nth-child(4){left:53%;top:62%}.project-map .card{height:clamp(160px,26dvh,220px)}#lens{left:0!important;top:0!important;transform:translate3d(calc(50vw - 130px),25dvh,0)!important}}
 @media(max-height:500px) and (min-width:701px){.project-map .card{height:36dvh;min-height:0;padding:16px}.project-map .card .cover-word{font-size:clamp(28px,4vw,48px);margin-top:16px}.project-map .card small,.project-map .card-bottom{display:none}}
 @media(prefers-reduced-motion:reduce){.project-map .grid{will-change:auto}.project-map .card{will-change:auto}}
+
+/* Sinaliza a continuidade antes de entregar o scroll à galeria. */
+.zoom-handoff-cue{position:absolute;left:6vw;bottom:7vh;max-width:80vw;font:12px/1.5 Arial,sans-serif;letter-spacing:.02em;color:#181818;opacity:var(--handoff-progress,0);transform:translate3d(calc((1 - var(--handoff-progress,0))*18px),0,0);pointer-events:none}

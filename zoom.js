@@ -23,6 +23,7 @@
    document.body.classList.add('zoom-expanding');
    const sourceWord=sourceCard.querySelector('.cover-word'),rect=sourceCard.getBoundingClientRect(),wordRect=sourceWord.getBoundingClientRect();
    cover=template.cloneNode(true);cover.classList.add('zoom-cover');cover.setAttribute('aria-hidden','true');map.append(cover);coverWord=cover.querySelector('.cover-word');
+   const cue=document.createElement('span');cue.className='zoom-handoff-cue';cue.textContent='Continue rolando para percorrer os projetos →';cover.append(cue);
    const destination=coverWord.getBoundingClientRect(),startFont=parseFloat(getComputedStyle(sourceWord).fontSize),endFont=parseFloat(getComputedStyle(coverWord).fontSize);
    geometry={rect,dx:wordRect.left-destination.left,dy:wordRect.top-destination.top,scale:startFont/endFont};
    sourceCard.style.visibility='hidden';
@@ -30,6 +31,7 @@
   const t=progress*progress*(3-2*progress),rest=1-t,r=geometry.rect;
   cover.style.clipPath='inset('+(Math.max(0,r.top)*rest)+'px '+(Math.max(0,innerWidth-r.right)*rest)+'px '+(Math.max(0,innerHeight-r.bottom)*rest)+'px '+(Math.max(0,r.left)*rest)+'px)';
   coverWord.style.transform='translate3d('+(geometry.dx*rest)+'px,'+(geometry.dy*rest)+'px,0) scale('+(geometry.scale+(1-geometry.scale)*t)+')';
+  cover.style.setProperty('--handoff-progress',Math.max(0,Math.min(1,(progress-.65)/.25)));
   const slot=cover.querySelector('.slot');if(slot)slot.style.opacity=String(t);
   plane.style.opacity=String(rest);intro.style.opacity=String(rest);
  }
@@ -48,7 +50,7 @@
   if(accessible!==(progress>.12)||value===0){accessible=progress>.12;buttons.forEach(b=>{b.tabIndex=accessible?0:-1;});}
   plane.setAttribute('aria-hidden',String(progress<=.05));
   expandCover(Math.max(0,Math.min(1,value-1)));
-  if(value>=handoff-.001&&document.body.classList.contains('map-mode')){document.body.classList.add('zoom-arrival');value=target=1;enterGalleryFromZoom();return;}
+  if(target>=handoff-.035&&value>=handoff-.035&&document.body.classList.contains('map-mode')){expandCover(1);document.body.classList.add('zoom-arrival');value=target=1;enterGalleryFromZoom();return;}
   if(value!==target)frame=requestAnimationFrame(draw);
  }
  function set(next){target=Math.max(0,Math.min(handoff,next));if(!frame){lastTime=0;frame=requestAnimationFrame(draw);}}

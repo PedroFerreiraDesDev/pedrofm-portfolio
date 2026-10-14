@@ -2,7 +2,7 @@
 const projects=[...portfolioData.projects.filter(p=>!p.about),...portfolioData.projects.filter(p=>p.about)];
 const $=id=>document.getElementById(id),grid=$('grid'),gallery=$('gallery'),track=$('track'),lens=$('lens'),details=$('case');
 const word=p=>escapeContent(p.word).replaceAll('\n','<br>');
-let current=0,mode='home',lastMove=0,detailsReady=false,wheelTotal=0,wheelStamp=0,wheelConsumed=false,lensFrame=0,lensPoint=null;
+let current=0,mode='home',lastMove=0,detailsReady=false,wheelTotal=0,wheelStamp=0,lensFrame=0,lensPoint=null;
 grid.innerHTML=projects.filter(p=>!p.about).map((p,i)=>'<div class="map-node" style="--entry-x:'+([-55,55,-55,55][i%4])+'vw;--entry-y:'+([-35,-35,35,35][i%4])+'vh"><button class="card" style="background:'+p.color+';color:#101010" data-index="'+i+'" aria-label="Abrir '+escapeContent(p.title)+'"><span class="card-face"><span class="n">0'+(i+1)+' / '+escapeContent(p.category)+'</span><strong class="cover-word">'+word(p)+'</strong><span class="card-bottom">PROVISÓRIO</span></span><span class="card-hover-tint" aria-hidden="true"></span><span class="card-summary">'+escapeContent(p.summary)+'</span></button></div>').join('');
 track.innerHTML=[projects.at(-1),...projects,projects[0]].map(p=>'<div class="slide" style="background:'+p.color+';color:#101010"><span class="slot">'+(p.about?'PEDRO.FM / PERFIL EM CONSTRUÇÃO':'ESPAÇO PROVISÓRIO · CAPA PENDENTE')+'</span><strong class="cover-word">'+word(p)+'</strong></div>').join('');
 function arrangeMap(){
@@ -55,7 +55,7 @@ function route(){
  updateMotion();
 }
 function move(direction){if(mode!=='gallery'||trackBusy||!direction)return;const step=Math.sign(direction),next=(current+step+projects.length)%projects.length;pendingMove={index:next,slot:current+1+step};trackBusy=true;navigate('galeria',next);}
-function enterGalleryFromZoom(){lastMove=Date.now();wheelStamp=lastMove;wheelConsumed=true;wheelTotal=0;navigate('galeria',0);}
+function enterGalleryFromZoom(){wheelStamp=0;wheelTotal=0;navigate('galeria',0);}
 function openDetails(){if(mode==='gallery'&&!trackBusy)navigate('projeto');}
 $('name-link').onclick=e=>{e.stopPropagation();navigate('projeto',projects.length-1);};
 $('overview').addEventListener('click',e=>{const card=e.target.closest('[data-index]');if(e.target.closest('#name-link'))return;if(card)navigate('galeria',Number(card.dataset.index));else navigate('galeria',0);});
@@ -65,10 +65,11 @@ gallery.addEventListener('wheel',e=>{
  if(e.ctrlKey)return;
  if(mode==='gallery'){
   e.preventDefault();const now=Date.now(),unit=e.deltaMode===1?16:e.deltaMode===2?gallery.clientHeight:1,delta=(Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY)*unit;
-  if(now-wheelStamp>180){wheelTotal=0;wheelConsumed=false;}wheelStamp=now;
-  if(trackBusy||now-lastMove<980){wheelConsumed=true;return;}if(wheelConsumed)return;
+  if(now-wheelStamp>180)wheelTotal=0;wheelStamp=now;
+  // Enquanto a capa se move, descarta inercia sem bloquear o proximo gesto.
+  if(trackBusy){wheelTotal=0;return;}
   if(wheelTotal&&Math.sign(wheelTotal)!==Math.sign(delta))wheelTotal=0;
-  wheelTotal+=delta;if(Math.abs(wheelTotal)>=60){wheelConsumed=true;wheelTotal=0;lastMove=now;move(Math.sign(delta));}
+  wheelTotal+=delta;if(Math.abs(wheelTotal)>=60){wheelTotal=0;lastMove=now;move(Math.sign(delta));}
  }
  else if(mode==='detail'&&e.deltaY<0&&gallery.scrollTop<=2){e.preventDefault();lastMove=Date.now();navigate('galeria');}
 },{passive:false});

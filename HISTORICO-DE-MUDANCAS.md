@@ -344,3 +344,11 @@ O retorno de Pedro indicou que 300 ms parecia um erro visual. A abertura agora d
 brand.css centraliza a marca Pedro.fm: mesma grafia, família Arial/Helvetica, peso 900, espaçamento de -.075em e cor base #181818. Os tamanhos variam conforme a hierarquia. A home mantém sua interação de cor. Abertura, pop-up do formulário, carregamento global e página de código usam essa classe. No pop-up, a onda SVG substitui os círculos, mantendo a assinatura estável enquanto a onda comunica o envio. Estados de sucesso e erro continuam explícitos em texto.
 
 Não há mudança no serviço de envio ou destinatário. Testes de abertura e formulário usam simulações, sem enviar mensagens reais. Não foi feita inspeção visual no navegador; a percepção de fluidez depende de avaliação em dispositivos reais.
+
+## 14/10/2026 — Continuidade do zoom e da rolagem das capas
+
+O zoom esperava a diferença chegar a 0,001, embora a capa já parecesse completa. A entrega à galeria passa a ocorrer nos últimos 3,5% da expansão, completando o quadro antes de trocar a rota. Uma indicação discreta aparece no trecho final para explicar a continuação lateral.
+
+Em app.js, a chegada marcava o gesto como consumido e impunha 980 ms de bloqueio. Eventos contínuos renovavam o bloqueio até haver uma pausa de 180 ms, causando a sensação de travamento. Removemos esse bloqueio persistente. A galeria continua protegida por trackBusy durante a transição; eventos desse período são descartados sem acumular saltos. Ao terminar, novos deltas podem avançar, mesmo sem uma pausa no gesto. Mantidos limiar de 60 px, reversão e normalização de mouse/trackpad.
+
+Testes simulados verificam chegada, rolagem contínua, bloqueio durante animação, reversão e zoom de navegador. Não houve validação visual de fluidez nem medição de FPS em dispositivos reais.
