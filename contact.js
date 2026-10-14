@@ -5,7 +5,7 @@
   if(!popup){
    popup=document.createElement('dialog');popup.className='contact-feedback';
    popup.setAttribute('aria-labelledby','contact-feedback-title');
-   popup.innerHTML='<div class="contact-wave" aria-hidden="true"><i></i><i></i><i></i></div><div role="status" aria-live="polite"><h2 id="contact-feedback-title"></h2><p></p></div><button type="button">Continuar no projeto</button>';
+   popup.innerHTML='<div class="contact-brand"><span class="brand-wordmark">Pedro.fm</span><svg class="brand-wave" viewBox="0 0 180 24" aria-hidden="true"><path d="M0 12 Q15 0 30 12 T60 12 T90 12 T120 12 T150 12 T180 12"/></svg></div><div role="status" aria-live="polite"><h2 id="contact-feedback-title"></h2><p></p></div><button type="button">Continuar no projeto</button>';
    document.body.append(popup);
    popup.querySelector('button').addEventListener('click',()=>popup.close());
    popup.addEventListener('keydown',e=>e.stopPropagation());

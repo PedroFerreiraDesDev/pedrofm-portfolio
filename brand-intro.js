@@ -1,4 +1,4 @@
-/* Assinatura de abertura: 300ms, independente do carregamento de arquivos. */
+/* Assinatura de abertura: 1100ms, independente do carregamento de arquivos. */
 (()=>{
  const intro=document.getElementById('brand-intro');
  if(!intro||location.hash&&location.hash!=='#')return;
@@ -10,7 +10,7 @@
  requestAnimationFrame(()=>{
   if(intro.hidden)return;
   intro.classList.add('brand-playing');
-  timer=setTimeout(finish,300);
+  timer=setTimeout(finish,1100);
  });
  window.addEventListener('hashchange',finish);
  window.addEventListener('pagehide',finish,{once:true});

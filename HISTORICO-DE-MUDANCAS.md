@@ -336,3 +336,11 @@ A entrada espacial mantém uma trajetória entre origem e destino, em vez de faz
 ### Verificação
 
 Verificação de sintaxe, testes de comportamento da abertura e regressões existentes. Não houve inspeção visual em navegador nesta atualização: suavidade percebida e composição em dispositivos reais ainda precisam de avaliação visual.
+
+## 14/10/2026 — Revisão da abertura e consistência da marca
+
+O retorno de Pedro indicou que 300 ms parecia um erro visual. A abertura agora dura 1.100 ms: a assinatura entra ao longo de 600 ms, permanece reconhecível e a tela desaparece gradualmente nos últimos 352 ms. Esse tempo é uma decisão visual, não uma regra de UX. Links diretos e movimento reduzido continuam sem abertura.
+
+brand.css centraliza a marca Pedro.fm: mesma grafia, família Arial/Helvetica, peso 900, espaçamento de -.075em e cor base #181818. Os tamanhos variam conforme a hierarquia. A home mantém sua interação de cor. Abertura, pop-up do formulário, carregamento global e página de código usam essa classe. No pop-up, a onda SVG substitui os círculos, mantendo a assinatura estável enquanto a onda comunica o envio. Estados de sucesso e erro continuam explícitos em texto.
+
+Não há mudança no serviço de envio ou destinatário. Testes de abertura e formulário usam simulações, sem enviar mensagens reais. Não foi feita inspeção visual no navegador; a percepção de fluidez depende de avaliação em dispositivos reais.

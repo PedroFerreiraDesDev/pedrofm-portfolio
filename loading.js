@@ -5,7 +5,7 @@
  const scopes=new Map();
  function begin({label='Carregando…',scope=global,retry}={}){
   let state=scopes.get(scope);
-  if(!state){const panel=document.createElement('div');panel.className='loading-panel';panel.innerHTML=wave+'<span class="loading-message" role="status" aria-live="polite"></span><button type="button" class="loading-retry" hidden>Tentar novamente</button><button type="button" class="loading-dismiss" hidden>Continuar no site</button>';scope.append(panel);state={panel,count:0,timer:0};scopes.set(scope,state);}
+  if(!state){const panel=document.createElement('div');panel.className='loading-panel';panel.innerHTML=(scope===global?'<span class="brand-wordmark">Pedro.fm</span>':'')+wave+'<span class="loading-message" role="status" aria-live="polite"></span><button type="button" class="loading-retry" hidden>Tentar novamente</button><button type="button" class="loading-dismiss" hidden>Continuar no site</button>';scope.append(panel);state={panel,count:0,timer:0};scopes.set(scope,state);}
   const message=state.panel.querySelector('.loading-message'),button=state.panel.querySelector('.loading-retry'),dismiss=state.panel.querySelector('.loading-dismiss');
   state.count++;state.panel.hidden=true;button.hidden=true;dismiss.hidden=true;scope.classList.remove('load-failed');scope.setAttribute('aria-busy','true');
   clearTimeout(state.timer);state.timer=setTimeout(()=>{if(!state.count)return;state.panel.hidden=false;scope.classList.add('load-pending');if(scope===global)scope.hidden=false;message.textContent=label;window.dispatchEvent(new CustomEvent('pedro:loading',{detail:{active:true}}));},180);

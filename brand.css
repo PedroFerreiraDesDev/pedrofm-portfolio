@@ -1,0 +1,13 @@
+/* Assinatura compartilhada: alterar aqui evita versões divergentes da marca. */
+.brand-wordmark,#name-link.brand-wordmark{font-family:Arial,Helvetica,sans-serif;font-weight:900;font-style:normal;letter-spacing:-.075em;line-height:.95;text-transform:none;color:#181818;white-space:nowrap}
+.brand-wave{display:block;width:130px;height:24px;margin:20px auto 0;overflow:visible}
+.brand-wave path{fill:none;stroke:#7753ad;stroke-width:1.3}
+.contact-brand{text-align:center;margin:0 0 30px}
+.contact-brand .brand-wordmark{display:inline-block;font-size:clamp(36px,7vw,52px)}
+.contact-brand .brand-wave{width:104px;margin-top:18px}
+.contact-feedback[data-state=sending] .brand-wave{animation:brand-breathe 1.8s ease-in-out infinite}
+.contact-feedback[data-state=success] .brand-wave{opacity:1}
+.contact-feedback[data-state=error] .brand-wave{opacity:.5}
+.loading-panel>.brand-wordmark{display:block;font-size:42px;margin-bottom:24px}
+@keyframes brand-breathe{0%,100%{transform:scaleX(.88);opacity:.45}50%{transform:scaleX(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){.contact-feedback .brand-wave{animation:none!important}}
