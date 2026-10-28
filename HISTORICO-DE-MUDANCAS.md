@@ -352,3 +352,9 @@ O zoom esperava a diferença chegar a 0,001, embora a capa já parecesse complet
 Em app.js, a chegada marcava o gesto como consumido e impunha 980 ms de bloqueio. Eventos contínuos renovavam o bloqueio até haver uma pausa de 180 ms, causando a sensação de travamento. Removemos esse bloqueio persistente. A galeria continua protegida por trackBusy durante a transição; eventos desse período são descartados sem acumular saltos. Ao terminar, novos deltas podem avançar, mesmo sem uma pausa no gesto. Mantidos limiar de 60 px, reversão e normalização de mouse/trackpad.
 
 Testes simulados verificam chegada, rolagem contínua, bloqueio durante animação, reversão e zoom de navegador. Não houve validação visual de fluidez nem medição de FPS em dispositivos reais.
+
+## 27/10/2026 — Conclusão automática da aproximação
+
+zoom.js passa a concluir a expansão ao atingir 80% do trecho de aproximação da capa (valor 1,8 no percurso de 0 a 2). Os últimos 20% usam 420 ms, com desaceleração cúbica. Rolagem contrária cancela a conclusão e retoma a posição atual; sair da home cancela o ciclo. Movimento reduzido realiza a passagem sem essa animação adicional.
+
+app.js distingue a cauda decrescente do gesto de chegada de uma nova intenção de avançar. A proteção é restrita à chegada: libera em pausa maior que 120 ms, impulso novo mais forte, direção contrária ou limite de 450 ms. É uma heurística para mouse e trackpad, a validar em dispositivos reais; não garante identificar todo hardware. Não há avanço automático dentro dos estudos.
