@@ -41,9 +41,15 @@ Abra uma capa, dê um pequeno giro no mouse e solte. A borda da próxima capa de
 7. `exitRun = Math.min(240, gallery.clientHeight * .30)`: reserva um último trecho de leitura antes de soltar o palco. Ao subir, o percurso recomeça pelo fim. O atalho “Continuar leitura” e o foco pelo teclado também funcionam.
 8. O trackpad pode usar o eixo horizontal enquanto o palco está fixo. Fora dele, o site devolve o gesto ao navegador. Com preferência por movimento reduzido ou altura de até 280 px, as peças ficam em grade.
 
-## Por que não adicionei p5.js
+## Como o computador acompanha o gesto
 
-As peças deste percurso são imagens, títulos, botões e links já presentes no HTML. Para movê-los, usei o quadro de animação do navegador (requestAnimationFrame) e transformações de CSS. Não foi necessário recriar os botões e as legendas em um canvas. Os controles de foco, a ampliação de imagem e a navegação direta continuam disponíveis.
+O toque já tinha `touchmove`; no computador só havia roda, clique e teclado. O novo `mouse-drag.js` observa o botão principal. Até 7 px de deslocamento, o gesto pode ser um clique; ao passar desse limiar, o site captura o ponteiro e segue o eixo dominante até soltar. Um arrasto não pode abrir o projeto nem o zoom por engano. Os eventos de toque do celular continuam em seu próprio caminho.
+
+- **Mapa:** o arrasto usa o mesmo ganho do toque. A roda do trackpad também aceita o eixo horizontal.
+- **Capas:** `cover.feed(delta,true)` envia ao mesmo motor usado pelo dedo. O mouse pode parar entre capas ou inverter. Para a roda, a inversão usa a posição na tela se ainda havia avanço acumulado; deltas grandes são limitados em relação à largura. O limite de velocidade visual continua igual.
+- **Galeria:** ao arrastar no eixo X, o código compensa a proporção vertical de 1,85. Por isso, um arrasto de 100 px pede aproximadamente 100 px horizontais; girar a roda continua mais cadenciado. O clique curto continua ampliando a peça.
+- **Vento com p5.js:** no primeiro movimento do mouse, `wind.js` importa o módulo oficial `vendor/p5-2.4.0/noise.mjs`. O ruído mistura tempo e altura do ponteiro, e a energia do gesto regula a curvatura. O canvas existente desenha a onda num único ciclo. O funcionamento da navegação não depende desse carregamento.
+- **Trabalho poupado:** durante o arrasto, o código deixa de montar os caminhos SVG do hover. A leitura das posições das letras acontece em lote antes de aplicar estilos. São reduções de trabalho observáveis no código; não representam uma medição de FPS.
 
 ## Ver as linhas exatas
 

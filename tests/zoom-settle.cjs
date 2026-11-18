@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
 const source=fs.readFileSync(__dirname+'/../zoom.js','utf8');
-const code=source.slice(source.indexOf(' function draw(time)'),source.indexOf(" map.addEventListener('wheel'"));
+const code=source.slice(source.indexOf(' function draw(time)'),source.indexOf(" bindMouseDrag(map,"));
 function fixture(reduced=false){
  let queued,home=true,entries=0,time=0;
  const style={setProperty(){}};

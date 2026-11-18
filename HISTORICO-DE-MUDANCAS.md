@@ -374,3 +374,11 @@ app.js distingue a cauda decrescente do gesto de chegada de uma nova intenção 
 A versão anterior ainda trocava a capa inteira ao cruzar um limiar e retirava o carrossel de janelas de notebook mais baixas. Agora a pessoa controla a posição entre duas capas, inclusive ao parar e voltar. A galeria dos estudos tem um trilho finito mais espaçado, com saída para leitura vertical e percurso reversível. O texto, a imagem e a ampliação continuam no HTML.
 
 Confira as fórmulas, os controles de ritmo e as responsabilidades de cada arquivo em [Como a rolagem funciona](LEIA-A-ROLAGEM.md). Validação: testes automatizados do repositório, gesto parcial em uma capa e galeria de Identidade no navegador. Em uma janela de 1024 × 540, a segunda imagem com legenda ficou dentro do palco, o foco voltou à primeira e o atalho levou à leitura seguinte.
+
+## 18/11/2026 — Arrastar com o mouse no mapa, nas capas e na galeria
+
+O arrasto de um dedo já existia nas capas. O desktop tratava a roda e o clique, mas não o gesto equivalente com o botão principal pressionado. Agora há distinção entre clicar e arrastar, inclusive sobre as imagens. O trackpad horizontal também controla o mapa inicial, e inverter a roda descarta o movimento de capa ainda pendente.
+
+O ruído do p5.js 2.4.0 modula a onda existente ao mover o mouse. Só o módulo matemático é carregado, sob demanda; não há segundo canvas. O toque e a preferência de movimento reduzido não precisam baixar esse recurso.
+
+Na prévia de desktop no Chrome, o arrasto revelou o mapa e deslocou a capa sem abrir o estudo. Na galeria de Identidade, um arrasto de aproximadamente 300 px deslocou o trilho em cerca de 299 px sem disparar o zoom. O clique seguinte abriu o diálogo. A documentação técnica está em LEIA-A-ROLAGEM.md.

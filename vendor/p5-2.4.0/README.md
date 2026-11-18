@@ -1,0 +1,1 @@
+Módulo oficial dist/math/noise.js do pacote npm p5@2.4.0, reproduzido sem alterações como noise.mjs para importação pelo navegador. Licença: LGPL-2.1 (texto distribuído pelo projeto em LICENSE.txt). Projeto: https://github.com/processing/p5.js ; distribuição: https://www.npmjs.com/package/p5/v/2.4.0 .

@@ -113,3 +113,9 @@ pre{background:#f6f6f6;color:#181818;border-color:#ddd}
 
 /* Mapa com sete capas: rótulos e títulos cabem no celular. */
 @media(max-width:700px){.project-map .grid.expanded-map .card{padding:10px}.project-map .grid.expanded-map .cover-word{margin-top:8px;line-height:.98}.project-map .grid.expanded-map .card-bottom{display:none}.project-map .grid.expanded-map .card-summary{font-size:12px;left:6px;right:6px;bottom:6px;padding:8px}.project-map .grid.expanded-map .card .card-summary{opacity:0}.project-map .grid.expanded-map .card:is(:hover,:focus-visible) .card-summary{opacity:1}}
+
+@media (any-pointer:fine){
+ .project-map,.project-gallery-window,#gallery:not(.reading) #gallery-stage{user-select:none}
+ .project-gallery-window,#gallery:not(.reading) #gallery-stage .slide{cursor:grab}
+ .is-mouse-dragging,.is-mouse-dragging *{cursor:grabbing!important}
+}

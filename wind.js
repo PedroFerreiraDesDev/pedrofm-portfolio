@@ -7,6 +7,16 @@
  const dock=document.createElement('div');dock.className='sound-dock';dock.innerHTML='<button id="sound-toggle" aria-pressed="false" aria-label="Ativar vento sonoro"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><span id="sound-label" aria-live="polite">Som: desligado</span></button>';document.body.append(dock);
  const toggle=document.getElementById('sound-toggle'),label=document.getElementById('signal-label'),motion=matchMedia('(prefers-reduced-motion: reduce)');
  let w=innerWidth,h=innerHeight,x=w/2,y=h/2,px=x,py=y,energy=0,frame=0,last=0,hover=null,pointer=false,modulation=0,sound=null;
+ // Importação por intenção: não adia a primeira imagem e não cria outro canvas.
+ let noiseField=null,noiseRequested=false;
+ function enableMouseWind(){
+  if(noiseRequested||motion.matches)return;
+  noiseRequested=true;
+  import('./vendor/p5-2.4.0/noise.mjs').then(({default:install})=>{
+   const math={}; install(null,math); math.noiseSeed(117); math.noiseDetail(2,.5);
+   noiseField=math.noise;
+  }).catch(()=>{}); // O vento senoidal e os controles funcionam sem o módulo.
+ }
  function positionField(){
   const host=canvas.parentElement;
   if(host?.id==='track'){
@@ -41,29 +51,34 @@
   return null;
  }
  function setHover(action){
-  const next=action?.node||null;if(next===hover){label.textContent=action?.text||'';return;}
+  const next=action?.node||null;if(next===hover)return;
   hover?.classList.remove('is-resonating');hover=next;
   if(hover?.matches('.card,#name-link'))hover.classList.add('is-resonating');
   cursor.classList.toggle('action',!!action);label.textContent=action?.text||'';wake(.18);
  }
  function wake(amount){energy=Math.min(1,energy+amount);if(!frame&&!document.hidden)frame=requestAnimationFrame(draw);}
+ function galleryReading(){
+  const gallery=document.getElementById('gallery');
+  return gallery?.classList.contains('reading') && gallery.scrollTop>=gallery.clientHeight && gallery.querySelector('.experience-flow');
+ }
  function draw(time){
   frame=0;if(document.hidden)return;
   if(time-last<32&&!motion.matches){frame=requestAnimationFrame(draw);return;}last=time;
   px=motion.matches?x:px+(x-px)*.065;py=motion.matches?y:py+(y-py)*.065;modulation+=(energy-modulation)*.075;placeField();
   cursor.style.transform='translate3d('+Math.min(w-190,Math.max(0,px+15))+'px,'+Math.min(h-42,Math.max(0,py+16))+'px,0)';
-  const paths=[];if(ctx){ctx.clearRect(0,0,w,h);const phase=motion.matches?0:time*.0008,amplitude=12+modulation*48,inCover=canvas.parentElement?.id==='track';
+  const paths=[],buildMask=pointer&&!document.querySelector('.is-mouse-dragging')&&!(galleryReading());if(ctx){ctx.clearRect(0,0,w,h);const phase=motion.matches?0:time*.0008,amplitude=12+modulation*48,inCover=canvas.parentElement?.id==='track';
    for(let wave=0;wave<3;wave++){ctx.beginPath();ctx.lineWidth=1.05+modulation*.35;const alpha=(.18+modulation*.43)*(1-wave*.16);ctx.strokeStyle=inCover?'rgba(65,43,114,'+alpha+')':'rgba(114,81,171,'+alpha+')';const sourceX=-48;let path='';
-    for(let step=0;step<=72;step++){const t=step/72,envelope=Math.sin(t*Math.PI),anchor=t*t,sx=sourceX+(x-sourceX)*t;const carrier=Math.sin(t*Math.PI*(3+wave*.5+modulation)-phase+wave*.7),beat=Math.sin(t*Math.PI*7+phase*.7)*modulation*.35;const sy=py+(y-py)*anchor+(carrier+beat)*amplitude*envelope+(wave-1)*9*envelope;path+=(step?' L':'M')+sx.toFixed(2)+' '+sy.toFixed(2);if(!step)ctx.moveTo(sx,sy);else ctx.lineTo(sx,sy);}paths.push(path);ctx.stroke();
+    const bend=pointer&&noiseField&&!motion.matches?(noiseField(phase*.8+wave*1.7,y/Math.max(1,h)*2)-.4)*amplitude*modulation:0;
+    for(let step=0;step<=72;step++){const t=step/72,envelope=Math.sin(t*Math.PI),anchor=t*t,sx=sourceX+(x-sourceX)*t;const carrier=Math.sin(t*Math.PI*(3+wave*.5+modulation)-phase+wave*.7),beat=Math.sin(t*Math.PI*7+phase*.7)*modulation*.35;const sy=py+(y-py)*anchor+(carrier+beat)*amplitude*envelope+((wave-1)*9+bend)*envelope;if(buildMask)path+=(step?' L':'M')+sx.toFixed(2)+' '+sy.toFixed(2);if(!step)ctx.moveTo(sx,sy);else ctx.lineTo(sx,sy);}if(buildMask)paths.push(path);ctx.stroke();
    }
   }
-  if(window.dispatchEvent&&typeof CustomEvent==='function')window.dispatchEvent(new CustomEvent('pedro:wind',{detail:{paths,x,y,pointer}}));
+  if(window.dispatchEvent&&typeof CustomEvent==='function')window.dispatchEvent(new CustomEvent('pedro:wind',{detail:{paths,x,y,pointer:pointer&&buildMask}}));
   sound?.modulate(modulation,x/Math.max(1,w));
   energy*=.94;
   if(!motion.matches&&(energy>.006||modulation>.006||Math.abs(x-px)+Math.abs(y-py)>1))frame=requestAnimationFrame(draw);
   else if(ctx&&!motion.matches){ctx.clearRect(0,0,w,h);sound?.modulate(0,x/Math.max(1,w));}
  }
- document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const speed=Math.hypot(e.clientX-x,e.clientY-y);x=e.clientX;y=e.clientY;pointer=true;cursor.classList.add('visible');setHover(actionFor(e.target));wake(Math.min(.18,speed*.002));},{passive:true});
+ document.addEventListener('pointermove',e=>{if(e.pointerType==='touch'){pointer=false;return;}if(e.pointerType==='mouse')enableMouseWind();const speed=Math.hypot(e.clientX-x,e.clientY-y);x=e.clientX;y=e.clientY;pointer=true;cursor.classList.add('visible');setHover(actionFor(e.target));wake(Math.min(.18,speed*.002));},{passive:true});
  document.addEventListener('pointerout',e=>{if(!e.relatedTarget){pointer=false;cursor.classList.remove('visible');setHover(null);}},{passive:true});
  document.addEventListener('focusin',e=>{const action=actionFor(e.target);if(action){setHover(action);wake(.2);}});
  document.addEventListener('focusout',()=>{if(!pointer)setHover(null);});

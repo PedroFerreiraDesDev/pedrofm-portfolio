@@ -26,7 +26,8 @@ function coverMotion({width, reduced, paint, arrive, raf, cancel}) {
   function feed(pixels, touch = false) {
     if (!pixels) return;
     if (settling && Math.sign(pixels) === Math.sign(target)) return;
-    if (settling) target = position;
+    // Uma inversão da roda descarta o avanço que ainda não chegou à tela.
+    if (settling || (!touch && (target-position)*pixels < 0)) target = position;
     settling = false;
     const path = touch ? Math.max(300, Math.min(width() * 1.15, 650))
                        : Math.max(1050, Math.min(width() * 1.55, 1950));

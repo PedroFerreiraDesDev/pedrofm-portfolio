@@ -34,7 +34,9 @@
      row.figure.style.opacity=still?'1':String(.4+.6*enter);
      if(row.paper&&!still)row.paper.draw(mesh.clientWidth,mesh.clientHeight,outside*.55+leave*.35+(hover?energy*.025:0),x,y);
     }
-    row.letters.forEach(letter=>{const b=letter.parentElement.getBoundingClientRect(),distance=Math.hypot(mx-b.left-b.width/2,my-b.top-b.height/2),strength=Math.exp(-Math.pow(distance/85,2));letter.style.transform=still?'none':`translate3d(0,${-strength*16}px,${strength*22}px) rotateX(${strength*14}deg)`;letter.style.color=!still&&strength>.2?'#65429a':'';});
+    // Leia as caixas em lote antes de escrever transformações nas letras.
+    const boxes=still?[]:row.letters.map(letter=>letter.parentElement.getBoundingClientRect());
+    row.letters.forEach((letter,i)=>{const b=boxes[i],distance=!b?Infinity:Math.hypot(mx-b.left-b.width/2,my-b.top-b.height/2),strength=Math.exp(-Math.pow(distance/85,2));letter.style.transform=still?'none':`translate3d(0,${-strength*16}px,${strength*22}px) rotateX(${strength*14}deg)`;letter.style.color=!still&&strength>.2?'#65429a':'';});
    });
    if(renderer&&!motion.matches)renderer.draw(air.clientWidth,height,clamp((v.top-r.top)/Math.max(1,r.height-height)),x,y,energy,phase+gallery.scrollTop/height*.8);
    if(!motion.matches&&(energy>.006||Math.abs(tx-x)+Math.abs(ty-y)>.002))schedule();

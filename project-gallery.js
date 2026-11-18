@@ -94,6 +94,17 @@
    const target=event.target.closest('[data-project-zoom]');
    if(target&&['Enter',' '].includes(event.key)){event.preventDefault();zoom(target.querySelector('img'));}
   },{signal});
+  bindMouseDrag(viewport,{
+   signal,
+   accept:()=>!flat() && !dialog?.open && gallery.classList.contains('reading'),
+   move:(delta,axis)=>{
+    // No eixo X, a imagem acompanha o mouse 1:1, mesmo com percurso vertical mais longo.
+    const start=sceneStart(), top=gallery.scrollTop;
+    const base=axis==='x'?Math.max(start,Math.min(start+travel,top)):top;
+    const step=axis==='x'?delta*travel/Math.max(1,distance):delta;
+    gallery.scrollTo({top:base+step,behavior:'instant'});
+   }
+  });
   // O gesto vertical já é nativo. Aceite também o gesto horizontal do trackpad.
   gallery.addEventListener('wheel',event=>{
    if(flat()||event.ctrlKey||!event.deltaX||Math.abs(event.deltaY)>=Math.abs(event.deltaX))return;

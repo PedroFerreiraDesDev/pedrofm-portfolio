@@ -15,7 +15,7 @@ c.reset();small=true;c.select(-1);assert.deepEqual(moves,[1,-1]);
 const src=fs.readFileSync(__dirname+'/../app.js','utf8');
 let now=1000,handler;const inputs=[];
 const ctx={mode:'gallery',waitingRoute:false,Date:{now:()=>now},lastWheel:null,wheelTail:{at:now,delta:100},
- gallery:{clientHeight:800,addEventListener:(name,f)=>handler=f},cover:{feed:d=>inputs.push(d)}};
+ gallery:{clientWidth:1200,clientHeight:800,addEventListener:(name,f)=>handler=f},cover:{feed:d=>inputs.push(d)}};
 vm.runInNewContext(src.slice(src.indexOf("gallery.addEventListener('wheel',e=>{"),src.indexOf("gallery.addEventListener('scroll'")),ctx);
 const wheel=(y,x=0,opts={})=>{now+=16;handler({deltaY:y,deltaX:x,preventDefault(){},...opts})};
 wheel(80);wheel(60);assert.equal(inputs.length,0,'inertia filtered');

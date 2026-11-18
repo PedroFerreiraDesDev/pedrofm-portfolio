@@ -91,6 +91,10 @@ $('prev').onclick=()=>move(-1);$('next').onclick=()=>move(1);$('all').onclick=()
 gallery.addEventListener('click',e=>{if(mode!=='gallery'||e.target.closest('button,a')||Date.now()<swipeUntil)return;
  const id=e.target.closest('[data-project-id]')?.dataset.projectId;
  openDetails(id?projects.findIndex(p=>p.id===id):shown);});
+bindMouseDrag($('gallery-stage'), {
+ accept: target => mode==='gallery' && !waitingRoute && !target.closest('button,a'),
+ move: delta => { if(mode==='gallery' && !waitingRoute)cover.feed(delta,true); }
+});
 gallery.addEventListener('wheel',e=>{
  if(e.ctrlKey)return;
  if(mode==='gallery'){
@@ -105,7 +109,10 @@ gallery.addEventListener('wheel',e=>{
    wheelTail=continuing && now<expires ? {at:now,delta,expires} : null;
    if(wheelTail)return;
   }
-  cover.feed(Math.max(-120,Math.min(120,delta)));
+  // Não reduza uma página inteira ou um pacote de trackpad a um único dente.
+  // Preserve pequenos deltas; um evento isolado pede no máximo 18% do percurso.
+  const path=Math.max(1050,Math.min(gallery.clientWidth*1.55,1950));
+  cover.feed(Math.max(-path*.18,Math.min(path*.18,delta)));
  }
  else if(mode==='detail'&&e.deltaY<0&&gallery.scrollTop<=2){e.preventDefault();navigate('galeria');}
 },{passive:false});
