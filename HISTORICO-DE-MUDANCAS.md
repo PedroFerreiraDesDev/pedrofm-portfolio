@@ -358,3 +358,13 @@ Testes simulados verificam chegada, rolagem contínua, bloqueio durante animaç�
 zoom.js passa a concluir a expansão ao atingir 80% do trecho de aproximação da capa (valor 1,8 no percurso de 0 a 2). Os últimos 20% usam 420 ms, com desaceleração cúbica. Rolagem contrária cancela a conclusão e retoma a posição atual; sair da home cancela o ciclo. Movimento reduzido realiza a passagem sem essa animação adicional.
 
 app.js distingue a cauda decrescente do gesto de chegada de uma nova intenção de avançar. A proteção é restrita à chegada: libera em pausa maior que 120 ms, impulso novo mais forte, direção contrária ou limite de 450 ms. É uma heurística para mouse e trackpad, a validar em dispositivos reais; não garante identificar todo hardware. Não há avanço automático dentro dos estudos.
+
+## 18/11/2026 — Ritmo das capas e espaço do carrossel
+
+- Problema relatado: capas rápidas demais e carrossel inadequado em computadores com janelas menores.
+- `app.js`: limiar de troca passa de 60 para 140 unidades normalizadas, com contribuição limitada por evento. A cauda do gesto é filtrada nos dois sentidos por uma janela limitada; um novo impulso, pausa ou inversão libera a navegação. Cliques e teclado continuam disponíveis.
+- `white.css`: transição de 980 ms para 1.250 ms, com aceleração mais gradual. O temporizador de segurança em `app.js` acompanha essa duração.
+- `project-gallery.js`: calcula o orçamento de altura descontando a legenda e uma margem de segurança; limita flutuação e rotação para manter a peça visível. Centraliza a primeira e a última peça e mede a largura sem transformações. Recalcula ao redimensionar e carregar imagens.
+- `experience.css`: largura limitada à janela; altura das imagens respeita o orçamento calculado; textos longos quebram linha. Até 560 px de altura, usa grade vertical sem trecho fixo lateral. Movimento reduzido continua com alternativa estática.
+- `index.html` e `codigo.html`: nova versão dos recursos para evitar reaproveitar CSS/JS anterior em cache.
+- Validação: testes automatizados de navegação, inércia, retorno, entrada pela home, contato e geração da galeria. Teste matemático de limites em 1440×900, 1280×720, 1024×600, 800×600 e 390×844. Validação visual real não concluída: navegador bloqueado pelo ambiente. Os testes de geometria não substituem conferir a composição no dispositivo.

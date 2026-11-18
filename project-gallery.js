@@ -26,7 +26,8 @@
   const abort=new AbortController(),signal=abort.signal;
   const rail=scene.querySelector('.project-gallery-rail'),cards=[...rail.querySelectorAll('.project-gallery-card')];
   let frame=0,distance=0,start=0,travel=1;
-  const flat=()=>reduced.matches||innerHeight<=500;
+  const viewport=scene.querySelector('.project-gallery-window');
+  const flat=()=>reduced.matches||gallery.clientHeight<=560;
   function draw(){
    frame=0;if(document.hidden)return;
    if(flat()){rail.style.transform='none';cards.forEach(card=>card.style.transform='none');return;}
@@ -36,13 +37,32 @@
     const center=card.offsetLeft+card.offsetWidth/2-distance*p;
     const relative=(center-width/2)/width,focus=1-clamp(Math.abs(relative)*1.6);
     const scale=.82+focus*.18,offset=parseFloat(card.style.getPropertyValue('--piece-offset'))||0;
-    card.style.transform='translate3d(0,'+(Math.sin(p*Math.PI*2+i)*12+offset*height/100)+'px,0) rotate('+Math.max(-5,Math.min(5,relative*6))+'deg) scale('+scale+')';
+    // Réserve pour la rotation : garde aussi la légende dans la fenêtre.
+    const angle=Math.max(-3,Math.min(3,relative*4));
+    const reserve=Math.abs(Math.sin(angle*Math.PI/180))*card.offsetWidth/2+12;
+    const room=Math.max(0,(viewport.clientHeight-card.offsetHeight)/2-reserve);
+    const drift=Math.max(-room,Math.min(room,Math.sin(p*Math.PI*2+i)*12+offset*height/100));
+    card.style.transform='translate3d(0,'+drift+'px,0) rotate('+angle+'deg) scale('+scale+')';
    });
    scene.style.setProperty('--end-opacity',String(clamp((p-.87)/.13)));
   }
   function schedule(){if(!frame&&!document.hidden)frame=requestAnimationFrame(draw);}
   function measure(){
-   distance=Math.max(0,rail.scrollWidth-gallery.clientWidth);
+   scene.style.setProperty('--gallery-viewport-height',gallery.clientHeight+'px');
+   // Dimensions de mise en page, sans les transformations de flottement.
+   if(!flat()){
+    cards.forEach(card=>{
+     const caption=card.querySelector('span').offsetHeight;
+     card.style.setProperty('--gallery-image-height',Math.max(80,viewport.clientHeight-caption-72)+'px');
+    });
+    const first=cards[0],last=cards.at(-1);
+    rail.style.paddingLeft=Math.max(24,(gallery.clientWidth-(first?.offsetWidth||0))/2)+'px';
+    rail.style.paddingRight=Math.max(24,(gallery.clientWidth-(last?.offsetWidth||0))/2)+'px';
+   }else{
+    rail.style.paddingLeft='';rail.style.paddingRight='';
+    cards.forEach(card=>card.style.removeProperty('--gallery-image-height'));
+   }
+   distance=Math.max(0,rail.offsetWidth-gallery.clientWidth);
    travel=distance+gallery.clientHeight*.25;
    scene.style.setProperty('--gallery-height',flat()?'auto':(gallery.clientHeight+travel)+'px');
    start=gallery.scrollTop+scene.getBoundingClientRect().top-gallery.getBoundingClientRect().top;
