@@ -61,7 +61,11 @@ pre{background:#f6f6f6;color:#181818;border-color:#ddd}
 
 /* Un seul rythme: la position suit le scroll, sans seconde transition CSS en retard. */
 :root{--scene-duration:1.25s;--scene-ease:cubic-bezier(.4,0,.2,1)}
-#track{transition:transform var(--scene-duration) var(--scene-ease)}
+#track{transition:none}
+#gallery:not(.reading) #track .slot,#gallery:not(.reading) #track .cover-word{
+ translate:0 var(--paper-lift,0px);rotate:var(--paper-turn,0deg)
+}
+#gallery:not(.reading) #gallery-stage{touch-action:pinch-zoom}
 .story-block,.story-block.is-seen,#case .story-pair>*{transition:none;transform-origin:50% 65%}
 #gallery{overflow-anchor:none}
 .story-pair{gap:clamp(40px,6vw,90px);min-height:80vh;padding:65px 0}

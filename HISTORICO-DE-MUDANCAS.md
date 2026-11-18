@@ -368,3 +368,9 @@ app.js distingue a cauda decrescente do gesto de chegada de uma nova intenção 
 - `experience.css`: largura limitada à janela; altura das imagens respeita o orçamento calculado; textos longos quebram linha. Até 560 px de altura, usa grade vertical sem trecho fixo lateral. Movimento reduzido continua com alternativa estática.
 - `index.html` e `codigo.html`: nova versão dos recursos para evitar reaproveitar CSS/JS anterior em cache.
 - Validação: testes automatizados de navegação, inércia, retorno, entrada pela home, contato e geração da galeria. Teste matemático de limites em 1440×900, 1280×720, 1024×600, 800×600 e 390×844. Validação visual real não concluída: navegador bloqueado pelo ambiente. Os testes de geometria não substituem conferir a composição no dispositivo.
+
+## 18/11/2026 — A posição das capas acompanha o gesto
+
+A versão anterior ainda trocava a capa inteira ao cruzar um limiar e retirava o carrossel de janelas de notebook mais baixas. Agora a pessoa controla a posição entre duas capas, inclusive ao parar e voltar. A galeria dos estudos tem um trilho finito mais espaçado, com saída para leitura vertical e percurso reversível. O texto, a imagem e a ampliação continuam no HTML.
+
+Confira as fórmulas, os controles de ritmo e as responsabilidades de cada arquivo em [Como a rolagem funciona](LEIA-A-ROLAGEM.md). Validação: testes automatizados do repositório, gesto parcial em uma capa e galeria de Identidade no navegador. Em uma janela de 1024 × 540, a segunda imagem com legenda ficou dentro do palco, o foco voltou à primeira e o atalho levou à leitura seguinte.

@@ -1,23 +1,24 @@
 const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
-const source=fs.readFileSync(__dirname+'/../app.js','utf8');
-const start=source.indexOf("gallery.addEventListener('wheel',e=>{");
-const end=source.indexOf("gallery.addEventListener('scroll'",start);
-let handler,now=1000;const moves=[];
-const c={arrivalWheel:null,mode:'gallery',trackBusy:false,wheelTotal:0,wheelStamp:0,lastMove:1000,Date:{now:()=>now},gallery:{clientHeight:800,addEventListener:(name,fn)=>handler=fn},move:d=>moves.push(d),navigate(){}};
-vm.createContext(c);vm.runInContext(source.slice(start,end),c);
-const wheel=(deltaY,other={})=>{now+=16;handler({deltaY,deltaX:0,deltaMode:0,preventDefault(){},...other});};
-wheel(60);assert.equal(moves.length,0,'small input does not change cover');
-wheel(80);assert.deepEqual(moves,[1],'deliberate input advances one cover');
-c.trackBusy=true;for(let i=0;i<50;i++)wheel(20);assert.equal(moves.length,1,'no queue during transition');
-c.trackBusy=false;for(let i=0;i<10;i++)wheel(10);assert.equal(moves.length,1,'inertia after animation does not skip cover');
-now+=200;wheel(80);wheel(80);assert.deepEqual(moves,[1,1],'new gesture resumes');
-wheel(-80);wheel(-80);assert.deepEqual(moves,[1,1,-1],'reverse direction resumes');
-for(let i=0;i<10;i++)wheel(-10);assert.equal(moves.length,3,'reverse inertia also filtered');
-wheel(120,{ctrlKey:true});assert.equal(moves.length,3,'browser zoom preserved');
-now+=200;wheel(0,{deltaX:80});wheel(0,{deltaX:80});assert.equal(moves.length,4,'horizontal trackpad');
-now+=200;wheel(5,{deltaMode:1});wheel(5,{deltaMode:1});assert.equal(moves.length,5,'line delta normalized');
-c.arrivalWheel={at:now,delta:60,until:now+450};
-wheel(40);wheel(30);assert.equal(moves.length,5,'tail must not skip first cover');
-wheel(80);wheel(80);assert.equal(moves.length,6,'fresh impulse resumes');
-c.arrivalWheel={at:now,delta:40,until:now+450};for(let i=0;i<32;i++)wheel(1);assert.equal(c.arrivalWheel,null,'guard expires even with continuous input');
-console.log('OK: deliberate scroll, inertia in both directions, fresh input, horizontal trackpad, bounded guard.');
+const motion=vm.runInNewContext(fs.readFileSync(__dirname+'/../cover-motion.js','utf8')+';coverMotion');
+let callback=null,time=0,position=0,moves=[],small=false;
+const c=motion({width:()=>1200,reduced:()=>small,raf:f=>(callback=f,1),cancel:()=>callback=null,
+ paint:p=>position=p,arrive:d=>moves.push(d)});
+function frames(count){while(callback&&count--){const f=callback;callback=null;time+=16;f(time)}}
+c.feed(120);frames(120);assert.ok(position>0 && position<.1);assert.equal(moves.length,0);
+const held=position;frames(300);assert.equal(position,held,'pause holds partial progress');
+c.feed(-120);frames(120);assert.equal(position,0,'equal reverse input retraces');
+c.select(1);frames(30);assert.ok(position>0 && position<.35,'visible speed is bounded');
+c.feed(-80);frames(200);assert.deepEqual(moves,[],'reverse cancels settling');
+c.reset();for(let i=0;i<14;i++)c.feed(120);frames(250);assert.deepEqual(moves,[1]);
+c.reset();c.feed(-240,true);frames(180);assert.ok(position<0&&position>-1);
+c.reset();small=true;c.select(-1);assert.deepEqual(moves,[1,-1]);
+const src=fs.readFileSync(__dirname+'/../app.js','utf8');
+let now=1000,handler;const inputs=[];
+const ctx={mode:'gallery',waitingRoute:false,Date:{now:()=>now},lastWheel:null,wheelTail:{at:now,delta:100},
+ gallery:{clientHeight:800,addEventListener:(name,f)=>handler=f},cover:{feed:d=>inputs.push(d)}};
+vm.runInNewContext(src.slice(src.indexOf("gallery.addEventListener('wheel',e=>{"),src.indexOf("gallery.addEventListener('scroll'")),ctx);
+const wheel=(y,x=0,opts={})=>{now+=16;handler({deltaY:y,deltaX:x,preventDefault(){},...opts})};
+wheel(80);wheel(60);assert.equal(inputs.length,0,'inertia filtered');
+wheel(-40);wheel(30,80);wheel(2,0,{deltaMode:1});wheel(40,0,{ctrlKey:true});
+assert.deepEqual(inputs,[-40,80,32]);
+console.log('OK: incremental covers, pause, reversal, speed cap, settle, touch, motion preference and arrival.');
